@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductosSlugRouteImport } from './routes/productos.$slug'
+import { Route as RecetarioIndexRouteImport } from './routes/recetario.index'
+import { Route as RecetarioSlugRouteImport } from './routes/recetario.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductosSlugRoute = ProductosSlugRouteImport.update({
+  id: '/productos/$slug',
+  path: '/productos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecetarioIndexRoute = RecetarioIndexRouteImport.update({
+  id: '/recetario/',
+  path: '/recetario/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecetarioSlugRoute = RecetarioSlugRouteImport.update({
+  id: '/recetario/$slug',
+  path: '/recetario/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/productos/$slug': typeof ProductosSlugRoute
+  '/recetario/$slug': typeof RecetarioSlugRoute
+  '/recetario/': typeof RecetarioIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/productos/$slug': typeof ProductosSlugRoute
+  '/recetario/$slug': typeof RecetarioSlugRoute
+  '/recetario': typeof RecetarioIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/productos/$slug': typeof ProductosSlugRoute
+  '/recetario/$slug': typeof RecetarioSlugRoute
+  '/recetario/': typeof RecetarioIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/productos/$slug' | '/recetario/$slug' | '/recetario/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/productos/$slug' | '/recetario/$slug' | '/recetario'
+  id: '__root__' | '/' | '/productos/$slug' | '/recetario/$slug' | '/recetario/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductosSlugRoute: typeof ProductosSlugRoute
+  RecetarioSlugRoute: typeof RecetarioSlugRoute
+  RecetarioIndexRoute: typeof RecetarioIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +78,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/productos/$slug': {
+      id: '/productos/$slug'
+      path: '/productos/$slug'
+      fullPath: '/productos/$slug'
+      preLoaderRoute: typeof ProductosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recetario/': {
+      id: '/recetario/'
+      path: '/recetario'
+      fullPath: '/recetario/'
+      preLoaderRoute: typeof RecetarioIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recetario/$slug': {
+      id: '/recetario/$slug'
+      path: '/recetario/$slug'
+      fullPath: '/recetario/$slug'
+      preLoaderRoute: typeof RecetarioSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductosSlugRoute: ProductosSlugRoute,
+  RecetarioSlugRoute: RecetarioSlugRoute,
+  RecetarioIndexRoute: RecetarioIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
