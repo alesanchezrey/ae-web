@@ -39,6 +39,14 @@ export function useRevelar<T extends HTMLElement>(threshold = 0.2) {
       setVisible(true);
       return;
     }
+    const enPantalla = () => {
+      const r = el.getBoundingClientRect();
+      return r.top < window.innerHeight * (1 - threshold * 0.5) && r.bottom > 0;
+    };
+    if (enPantalla()) {
+      setVisible(true);
+      return;
+    }
     const obs = new IntersectionObserver(
       (entries) => {
         if (entries[0]?.isIntersecting) {
@@ -46,10 +54,21 @@ export function useRevelar<T extends HTMLElement>(threshold = 0.2) {
           obs.disconnect();
         }
       },
-      { threshold },
+      { threshold, rootMargin: "0px 0px -8% 0px" },
     );
     obs.observe(el);
-    return () => obs.disconnect();
+    const alScroll = () => {
+      if (enPantalla()) {
+        setVisible(true);
+        obs.disconnect();
+        window.removeEventListener("scroll", alScroll);
+      }
+    };
+    window.addEventListener("scroll", alScroll, { passive: true });
+    return () => {
+      obs.disconnect();
+      window.removeEventListener("scroll", alScroll);
+    };
   }, [threshold]);
 
   return { ref, visible };
