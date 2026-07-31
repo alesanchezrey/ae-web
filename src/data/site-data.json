@@ -1,0 +1,679 @@
+{
+  "productos": [
+    {
+      "slug": "harina-de-maiz-precocida",
+      "nombre": "Harina de Maíz Precocida",
+      "presentacion": "900 g",
+      "claim": "100% Natural",
+      "descripcion": "La base de la arepa de cada día. Maíz blanco precocido, molido para rendir en la cocina venezolana.",
+      "descripcionLarga": "Molida a partir de maíz blanco seleccionado y precocido, rinde parejo en la arepa, la cachapa, la hallaquita y el bollo. Una masa suave, sin grumos y con el punto justo de agua, lista en minutos.",
+      "imagen": "/productos/harina-maiz-1kg.png",
+      "composicion": "/productos/comp-harina-maiz-1kg.png",
+      "fotos": [
+        {
+          "src": "/fotos/harina-amasando.jpg",
+          "alt": "Manos amasando harina de maíz junto al empaque de Harina de Maíz Precocida Esperanza"
+        },
+        {
+          "src": "/fotos/harina-detalle.jpg",
+          "alt": "Harina de Maíz Precocida Esperanza cayendo del empaque a un bol de vidrio"
+        }
+      ],
+      "acento": "#E8B14D",
+      "atributos": [
+        {
+          "etiqueta": "Peso neto",
+          "valor": "900 g"
+        },
+        {
+          "etiqueta": "Materia prima",
+          "valor": "Maíz blanco"
+        },
+        {
+          "etiqueta": "Proceso",
+          "valor": "Precocida y enriquecida"
+        },
+        {
+          "etiqueta": "Certificación",
+          "valor": "100% Natural"
+        }
+      ]
+    },
+    {
+      "slug": "arroz-blanco-tipo-1-900g",
+      "nombre": "Arroz Blanco Tipo 1",
+      "presentacion": "900 g",
+      "claim": "Grano seleccionado · 100% Natural",
+      "descripcion": "Grano blanco sueltito, seleccionado uno a uno para que cada porción salga perfecta.",
+      "descripcionLarga": "Arroz tipo 1 de grano entero, clasificado para dejar fuera el grano partido. Absorbe el punto de agua sin apelmazarse: sale suelto para el acompañante diario y aguanta bien el guiso.",
+      "imagen": "/productos/arroz-blanco-900g.png",
+      "composicion": "/productos/comp-arroz-blanco-900g.png",
+      "fotos": [
+        {
+          "src": "/fotos/arroz-medida.jpg",
+          "alt": "Arroz Blanco Tipo 1 Esperanza cayendo del empaque de 900 g a una jarra medidora"
+        },
+        {
+          "src": "/fotos/arroz-cocina.jpg",
+          "alt": "Cocinero preparando un guiso junto al empaque de Arroz Blanco Tipo 1 Esperanza"
+        }
+      ],
+      "acento": "#2E7D46",
+      "atributos": [
+        {
+          "etiqueta": "Peso neto",
+          "valor": "900 g"
+        },
+        {
+          "etiqueta": "Tipo",
+          "valor": "Tipo 1"
+        },
+        {
+          "etiqueta": "Grano",
+          "valor": "Seleccionado"
+        },
+        {
+          "etiqueta": "Certificación",
+          "valor": "100% Natural"
+        }
+      ]
+    },
+    {
+      "slug": "aceite-de-soya-refinado",
+      "nombre": "Aceite de Soya Refinado",
+      "presentacion": "900 ml",
+      "descripcion": "Aceite refinado para freír, sofreír y acompañar cada receta de la casa.",
+      "descripcionLarga": "Aceite de soya refinado, de sabor neutro y punto de humo alto. Sirve igual para el sofrito del arroz con pollo, para la fritura del tequeño y para la mezcla de una torta.",
+      "imagen": "/productos/aceite-soya-900ml.png",
+      "composicion": "/productos/comp-aceite-soya-900ml.png",
+      "fotos": [
+        {
+          "src": "/fotos/aceite-caldero.jpg",
+          "alt": "Aceite de Soya Refinado Esperanza vertido en un caldero de hierro caliente"
+        },
+        {
+          "src": "/fotos/aceite-cocina-profesional.jpg",
+          "alt": "Equipo de cocina profesional friendo con aceite de soya"
+        }
+      ],
+      "acento": "#E8B14D",
+      "atributos": [
+        {
+          "etiqueta": "Contenido",
+          "valor": "900 ml"
+        },
+        {
+          "etiqueta": "Materia prima",
+          "valor": "Soya"
+        },
+        {
+          "etiqueta": "Proceso",
+          "valor": "Refinado"
+        },
+        {
+          "etiqueta": "Uso",
+          "valor": "Freír y sofreír"
+        }
+      ]
+    },
+    {
+      "slug": "arroz-blanco-tipo-1-1kg",
+      "nombre": "Arroz Blanco Tipo 1",
+      "presentacion": "1 kg",
+      "claim": "100% Natural",
+      "descripcion": "Mismo grano de siempre, presentación familiar para rendir más.",
+      "descripcionLarga": "La presentación familiar del arroz tipo 1 Esperanza. Mismo grano seleccionado, mismo punto de cocción, pensado para la mesa larga y para la semana completa.",
+      "imagen": "/productos/arroz-blanco-1kg.png",
+      "composicion": "/productos/comp-arroz-blanco-1kg.png",
+      "fotos": [],
+      "acento": "#1B3A6B",
+      "atributos": [
+        {
+          "etiqueta": "Peso neto",
+          "valor": "1 kg"
+        },
+        {
+          "etiqueta": "Tipo",
+          "valor": "Tipo 1"
+        },
+        {
+          "etiqueta": "Grano",
+          "valor": "Parboiled"
+        },
+        {
+          "etiqueta": "Certificación",
+          "valor": "100% Natural"
+        }
+      ]
+    },
+    {
+      "slug": "azucar-refinada",
+      "nombre": "Azúcar Refinada",
+      "presentacion": "1 kg",
+      "claim": "100% Natural",
+      "descripcion": "Dulce de caña venezolana, refinada para el café, las bebidas y la repostería de casa.",
+      "descripcionLarga": "Azúcar de caña refinada, de cristal parejo y disolución rápida. Cumple igual en el café de la mañana, en el papelón de la tarde y en el caramelo de un quesillo.",
+      "imagen": "/productos/azucar-refinada-1kg.png",
+      "composicion": "/productos/comp-azucar-refinada-1kg.png",
+      "fotos": [
+        {
+          "src": "/fotos/azucar-batidora.jpg",
+          "alt": "Azúcar Refinada Esperanza cayendo del empaque al bol de una batidora"
+        },
+        {
+          "src": "/fotos/azucar-reposteria.jpg",
+          "alt": "Repostera batiendo una mezcla junto al empaque de Azúcar Refinada Esperanza"
+        }
+      ],
+      "acento": "#1B3A6B",
+      "atributos": [
+        {
+          "etiqueta": "Peso neto",
+          "valor": "1 kg"
+        },
+        {
+          "etiqueta": "Materia prima",
+          "valor": "Caña de azúcar"
+        },
+        {
+          "etiqueta": "Proceso",
+          "valor": "Refinada"
+        },
+        {
+          "etiqueta": "Certificación",
+          "valor": "100% Natural"
+        }
+      ]
+    }
+  ],
+  "recetas": [
+    {
+      "slug": "arepas-clasicas",
+      "nombre": "Arepas clásicas",
+      "categorias": [
+        "Desayuno"
+      ],
+      "productos": [
+        "harina-de-maiz-precocida"
+      ],
+      "porciones": "6",
+      "tiempo": "25 min",
+      "imagen": "/recetas/arepas-clasicas.jpg",
+      "ingredientes": [
+        "2 tazas de Harina de Maíz Precocida Esperanza",
+        "2 ½ tazas de agua tibia",
+        "1 cdta de sal",
+        "1 cda de Aceite de Soya Esperanza (opcional, para la masa)"
+      ],
+      "pasos": [
+        "Mezclar el agua tibia con la sal.",
+        "Incorporar la harina poco a poco, amasando hasta lograr una masa suave y sin grumos.",
+        "Dejar reposar 5 minutos.",
+        "Formar bolas y aplanar en discos de 1 cm de grosor.",
+        "Cocinar en budare o sartén caliente, 7 minutos por cada lado hasta dorar.",
+        "Terminar en horno a 180 °C por 10 minutos si se prefieren más cocidas por dentro."
+      ],
+      "tip": "La arepa perdona todo — rellenar con lo que haya en la nevera."
+    },
+    {
+      "slug": "cachapas",
+      "nombre": "Cachapas",
+      "categorias": [
+        "Desayuno"
+      ],
+      "productos": [
+        "harina-de-maiz-precocida",
+        "azucar-refinada"
+      ],
+      "porciones": "8 unidades",
+      "tiempo": "20 min",
+      "imagen": "/recetas/cachapas.jpg",
+      "ingredientes": [
+        "1 taza de Harina de Maíz Precocida Esperanza",
+        "1 ½ tazas de leche",
+        "2 cdas de Azúcar Refinada Esperanza",
+        "1 huevo",
+        "1 cdta de sal",
+        "Aceite de Soya Esperanza para engrasar",
+        "Queso de mano al gusto"
+      ],
+      "pasos": [
+        "Batir el huevo con la leche.",
+        "Añadir la harina, el azúcar y la sal, mezclar hasta obtener una mezcla ligera tipo panqueca.",
+        "Engrasar un sartén y verter un cucharón de mezcla.",
+        "Cocinar 3-4 minutos por lado hasta dorar.",
+        "Rellenar con queso de mano y doblar por la mitad."
+      ]
+    },
+    {
+      "slug": "bollos-pelones",
+      "nombre": "Bollos pelones",
+      "categorias": [
+        "Almuerzo"
+      ],
+      "productos": [
+        "harina-de-maiz-precocida"
+      ],
+      "porciones": "8",
+      "tiempo": "1 h",
+      "imagen": "/recetas/bollos-pelones.jpg",
+      "ingredientes": [
+        "2 tazas de Harina de Maíz Precocida Esperanza",
+        "2 ½ tazas de caldo de pollo tibio",
+        "1 cdta de sal",
+        "300 g de carne molida guisada (con cebolla, ají, tomate)",
+        "Hojas de plátano o papel aluminio para envolver"
+      ],
+      "pasos": [
+        "Amasar la harina con el caldo tibio y la sal hasta lograr masa suave.",
+        "Formar bolas, hacer un hueco en el centro y rellenar con la carne guisada.",
+        "Cerrar bien la masa cubriendo el relleno por completo.",
+        "Envolver en hoja de plátano o papel aluminio.",
+        "Sancochar en agua hirviendo 25-30 minutos."
+      ]
+    },
+    {
+      "slug": "hallaquitas",
+      "nombre": "Hallaquitas",
+      "categorias": [
+        "Acompañante"
+      ],
+      "productos": [
+        "harina-de-maiz-precocida",
+        "aceite-de-soya-refinado"
+      ],
+      "porciones": "10",
+      "tiempo": "40 min",
+      "imagen": "/recetas/hallaquitas.jpg",
+      "ingredientes": [
+        "2 tazas de Harina de Maíz Precocida Esperanza",
+        "2 tazas de agua o caldo",
+        "2 cdas de Aceite de Soya Esperanza",
+        "1 cdta de sal",
+        "Hojas de plátano para envolver"
+      ],
+      "pasos": [
+        "Mezclar el agua con el aceite y la sal.",
+        "Incorporar la harina y amasar hasta obtener consistencia suave.",
+        "Formar porciones alargadas y envolver en hoja de plátano.",
+        "Sancochar 20-25 minutos."
+      ]
+    },
+    {
+      "slug": "empanadas-de-maiz",
+      "nombre": "Empanadas de maíz",
+      "categorias": [
+        "Desayuno",
+        "Merienda"
+      ],
+      "productos": [
+        "harina-de-maiz-precocida",
+        "aceite-de-soya-refinado"
+      ],
+      "porciones": "10",
+      "tiempo": "45 min",
+      "imagen": "/recetas/empanadas-de-maiz.jpg",
+      "ingredientes": [
+        "2 tazas de Harina de Maíz Precocida Esperanza",
+        "2 tazas de agua tibia",
+        "1 cdta de sal",
+        "Relleno a elección (queso, carne mechada, pollo)",
+        "Aceite de Soya Esperanza para freír"
+      ],
+      "pasos": [
+        "Amasar la harina con el agua tibia y la sal.",
+        "Formar bolas, aplanar en discos y rellenar.",
+        "Cerrar en forma de media luna, sellando bien los bordes.",
+        "Freír en aceite caliente hasta dorar por ambos lados.",
+        "Escurrir sobre papel absorbente."
+      ]
+    },
+    {
+      "slug": "arroz-blanco-venezolano",
+      "nombre": "Arroz blanco venezolano",
+      "categorias": [
+        "Acompañante"
+      ],
+      "productos": [
+        "arroz-blanco-tipo-1-1kg",
+        "aceite-de-soya-refinado"
+      ],
+      "porciones": "6",
+      "tiempo": "25 min",
+      "imagen": "/recetas/arroz-blanco-venezolano.jpg",
+      "ingredientes": [
+        "2 tazas de Arroz Blanco Tipo 1 Esperanza",
+        "4 tazas de agua",
+        "2 cdas de Aceite de Soya Esperanza",
+        "1 cdta de sal"
+      ],
+      "pasos": [
+        "Calentar el aceite en un caldero, sofreír el arroz 2 minutos.",
+        "Añadir el agua y la sal, llevar a hervor.",
+        "Bajar el fuego, tapar y cocinar 18-20 minutos sin destapar.",
+        "Dejar reposar 5 minutos y soltar con un tenedor."
+      ]
+    },
+    {
+      "slug": "arroz-con-pollo",
+      "nombre": "Arroz con pollo",
+      "categorias": [
+        "Almuerzo"
+      ],
+      "productos": [
+        "arroz-blanco-tipo-1-1kg",
+        "aceite-de-soya-refinado"
+      ],
+      "porciones": "6",
+      "tiempo": "45 min",
+      "imagen": "/recetas/arroz-con-pollo.jpg",
+      "ingredientes": [
+        "2 tazas de Arroz Blanco Tipo 1 Esperanza",
+        "500 g de pollo en trozos",
+        "1 cebolla, 1 pimentón, 2 dientes de ajo (picados)",
+        "4 tazas de caldo de pollo",
+        "3 cdas de Aceite de Soya Esperanza",
+        "Sal y color al gusto"
+      ],
+      "pasos": [
+        "Sofreír el pollo en el aceite hasta dorar, reservar.",
+        "En el mismo caldero, sofreír cebolla, pimentón y ajo.",
+        "Incorporar el arroz, sofreír 2 minutos.",
+        "Añadir el pollo, el caldo y la sal, llevar a hervor.",
+        "Bajar el fuego, tapar y cocinar 20 minutos."
+      ]
+    },
+    {
+      "slug": "arroz-de-mariscos",
+      "nombre": "Arroz de mariscos",
+      "categorias": [
+        "Almuerzo"
+      ],
+      "productos": [
+        "arroz-blanco-tipo-1-1kg",
+        "aceite-de-soya-refinado"
+      ],
+      "porciones": "6",
+      "tiempo": "40 min",
+      "imagen": "/recetas/arroz-de-mariscos.jpg",
+      "ingredientes": [
+        "2 tazas de Arroz Blanco Tipo 1 Esperanza",
+        "400 g de mariscos mixtos (camarón, calamar, mejillón)",
+        "1 cebolla, 1 pimentón, 2 dientes de ajo",
+        "4 tazas de fondo de pescado o agua",
+        "3 cdas de Aceite de Soya Esperanza",
+        "Cilantro y sal al gusto"
+      ],
+      "pasos": [
+        "Sofreír cebolla, pimentón y ajo en el aceite.",
+        "Añadir los mariscos y saltear 3 minutos.",
+        "Incorporar el arroz, sofreír brevemente.",
+        "Agregar el fondo y la sal, llevar a hervor.",
+        "Tapar y cocinar 18-20 minutos. Finalizar con cilantro fresco."
+      ]
+    },
+    {
+      "slug": "ensalada-de-arroz",
+      "nombre": "Ensalada de arroz",
+      "categorias": [
+        "Acompañante"
+      ],
+      "productos": [
+        "arroz-blanco-tipo-1-900g"
+      ],
+      "porciones": "6",
+      "tiempo": "30 min (+ enfriado)",
+      "imagen": "/recetas/ensalada-de-arroz.jpg",
+      "ingredientes": [
+        "2 tazas de Arroz Blanco Tipo 1 Esperanza, cocido y frío",
+        "1 zanahoria y 1 taza de vainitas, cocidas y picadas",
+        "1 taza de granos de maíz",
+        "Mayonesa al gusto",
+        "Sal y pimienta"
+      ],
+      "pasos": [
+        "Cocinar el arroz y dejar enfriar completamente.",
+        "Mezclar con las verduras cocidas.",
+        "Incorporar mayonesa hasta lograr consistencia cremosa.",
+        "Sazonar con sal y pimienta, refrigerar antes de servir."
+      ]
+    },
+    {
+      "slug": "arroz-con-leche",
+      "nombre": "Arroz con leche",
+      "categorias": [
+        "Postre"
+      ],
+      "productos": [
+        "arroz-blanco-tipo-1-900g",
+        "azucar-refinada"
+      ],
+      "porciones": "6",
+      "tiempo": "45 min",
+      "imagen": "/recetas/arroz-con-leche.jpg",
+      "ingredientes": [
+        "1 taza de Arroz Blanco Tipo 1 Esperanza",
+        "4 tazas de leche",
+        "¾ taza de Azúcar Refinada Esperanza",
+        "1 rama de canela",
+        "Ralladura de limón"
+      ],
+      "pasos": [
+        "Cocinar el arroz en agua hasta ablandar, escurrir.",
+        "Añadir la leche, la canela y la ralladura, cocinar a fuego bajo 25 minutos revolviendo.",
+        "Incorporar el azúcar y cocinar 5 minutos más hasta espesar.",
+        "Servir tibio o frío con canela en polvo."
+      ]
+    },
+    {
+      "slug": "torta-de-platano",
+      "nombre": "Torta de plátano",
+      "categorias": [
+        "Postre"
+      ],
+      "productos": [
+        "azucar-refinada",
+        "aceite-de-soya-refinado"
+      ],
+      "porciones": "8",
+      "tiempo": "1 h",
+      "imagen": "/recetas/torta-de-platano.jpg",
+      "ingredientes": [
+        "3 plátanos maduros",
+        "1 taza de Azúcar Refinada Esperanza",
+        "½ taza de Aceite de Soya Esperanza",
+        "3 huevos",
+        "2 tazas de harina de trigo",
+        "1 cda de polvo de hornear"
+      ],
+      "pasos": [
+        "Licuar los plátanos con el aceite, los huevos y el azúcar.",
+        "Mezclar la harina con el polvo de hornear e incorporar a la mezcla líquida.",
+        "Verter en molde engrasado.",
+        "Hornear a 180 °C por 40-45 minutos hasta dorar."
+      ]
+    },
+    {
+      "slug": "quesillo",
+      "nombre": "Quesillo",
+      "categorias": [
+        "Postre"
+      ],
+      "productos": [
+        "azucar-refinada"
+      ],
+      "porciones": "8",
+      "tiempo": "1 h 15 min",
+      "imagen": "/recetas/quesillo.jpg",
+      "ingredientes": [
+        "1 taza de Azúcar Refinada Esperanza (para el caramelo)",
+        "6 huevos",
+        "1 lata de leche condensada",
+        "1 lata de leche evaporada",
+        "1 cdta de vainilla"
+      ],
+      "pasos": [
+        "Derretir el azúcar a fuego medio hasta lograr caramelo dorado, verter en el molde.",
+        "Licuar huevos, leche condensada, leche evaporada y vainilla.",
+        "Verter sobre el caramelo.",
+        "Cocinar a baño María, tapado, por 1 hora o hasta cuajar.",
+        "Enfriar y desmoldar."
+      ]
+    },
+    {
+      "slug": "dulce-de-lechosa",
+      "nombre": "Dulce de lechosa",
+      "categorias": [
+        "Postre"
+      ],
+      "productos": [
+        "azucar-refinada"
+      ],
+      "porciones": "8",
+      "tiempo": "1 h",
+      "imagen": "/recetas/dulce-de-lechosa.jpg",
+      "ingredientes": [
+        "1 lechosa verde grande, en trozos",
+        "3 tazas de Azúcar Refinada Esperanza",
+        "1 rama de canela",
+        "3 clavos de olor",
+        "Agua, cantidad necesaria"
+      ],
+      "pasos": [
+        "Cubrir la lechosa con agua y cocinar 15 minutos, escurrir.",
+        "En una olla, disolver el azúcar en agua con la canela y el clavo.",
+        "Añadir la lechosa y cocinar a fuego medio 30-40 minutos hasta que tome consistencia de almíbar.",
+        "Servir frío, tradicionalmente con queso blanco."
+      ]
+    },
+    {
+      "slug": "majarete",
+      "nombre": "Majarete",
+      "categorias": [
+        "Postre"
+      ],
+      "productos": [
+        "harina-de-maiz-precocida",
+        "azucar-refinada"
+      ],
+      "porciones": "6",
+      "tiempo": "30 min",
+      "imagen": "/recetas/majarete.jpg",
+      "ingredientes": [
+        "½ taza de Harina de Maíz Precocida Esperanza",
+        "2 tazas de leche de coco",
+        "1 taza de leche",
+        "¾ taza de Azúcar Refinada Esperanza",
+        "Canela en polvo"
+      ],
+      "pasos": [
+        "Disolver la harina en la leche fría.",
+        "Calentar la leche de coco con el azúcar.",
+        "Incorporar la mezcla de harina, revolviendo constantemente hasta espesar (8-10 minutos).",
+        "Verter en platos, dejar enfriar y espolvorear canela."
+      ]
+    },
+    {
+      "slug": "jalea-de-mango",
+      "nombre": "Jalea de mango",
+      "categorias": [
+        "Postre"
+      ],
+      "productos": [
+        "azucar-refinada"
+      ],
+      "porciones": "1 frasco grande",
+      "tiempo": "50 min",
+      "imagen": "/recetas/jalea-de-mango.jpg",
+      "ingredientes": [
+        "4 mangos maduros, en trozos",
+        "2 tazas de Azúcar Refinada Esperanza",
+        "Jugo de 1 limón"
+      ],
+      "pasos": [
+        "Cocinar el mango con poca agua hasta ablandar, licuar o triturar.",
+        "Volver a la olla con el azúcar y el jugo de limón.",
+        "Cocinar a fuego medio, revolviendo, hasta espesar (30-35 minutos).",
+        "Envasar en caliente en frasco esterilizado."
+      ]
+    },
+    {
+      "slug": "tequenos",
+      "nombre": "Tequeños",
+      "categorias": [
+        "Merienda"
+      ],
+      "productos": [
+        "aceite-de-soya-refinado"
+      ],
+      "porciones": "20 unidades",
+      "tiempo": "40 min",
+      "imagen": "/recetas/tequenos.jpg",
+      "ingredientes": [
+        "20 tiras de masa para tequeños (o pasta de hojaldre cortada en tiras)",
+        "20 bastones de queso blanco duro",
+        "Aceite de Soya Esperanza para freír"
+      ],
+      "pasos": [
+        "Envolver cada bastón de queso con una tira de masa, sellando bien los extremos.",
+        "Calentar abundante aceite.",
+        "Freír en tandas hasta dorar uniformemente, 3-4 minutos.",
+        "Escurrir sobre papel absorbente y servir calientes."
+      ]
+    },
+    {
+      "slug": "tostones",
+      "nombre": "Tostones",
+      "categorias": [
+        "Acompañante"
+      ],
+      "productos": [
+        "aceite-de-soya-refinado"
+      ],
+      "porciones": "4",
+      "tiempo": "20 min",
+      "imagen": "/recetas/tostones.jpg",
+      "ingredientes": [
+        "2 plátanos verdes",
+        "Aceite de Soya Esperanza para freír",
+        "Sal al gusto"
+      ],
+      "pasos": [
+        "Pelar y cortar los plátanos en rodajas gruesas.",
+        "Freír en aceite caliente 3-4 minutos hasta dorar levemente.",
+        "Retirar y aplastar cada rodaja hasta aplanar.",
+        "Freír por segunda vez hasta dorar y crujir.",
+        "Escurrir y salar."
+      ]
+    },
+    {
+      "slug": "torta-de-auyama",
+      "nombre": "Torta de auyama",
+      "categorias": [
+        "Postre"
+      ],
+      "productos": [
+        "azucar-refinada",
+        "aceite-de-soya-refinado"
+      ],
+      "porciones": "8",
+      "tiempo": "1 h",
+      "imagen": "/recetas/torta-de-auyama.jpg",
+      "ingredientes": [
+        "2 tazas de auyama cocida y hecha puré",
+        "1 taza de Azúcar Refinada Esperanza",
+        "½ taza de Aceite de Soya Esperanza",
+        "3 huevos",
+        "2 tazas de harina de trigo",
+        "1 cda de polvo de hornear",
+        "Canela al gusto"
+      ],
+      "pasos": [
+        "Batir el puré de auyama con el azúcar, el aceite y los huevos.",
+        "Incorporar la harina, el polvo de hornear y la canela.",
+        "Verter en molde engrasado.",
+        "Hornear a 180 °C por 45-50 minutos hasta que al pinchar salga limpio."
+      ]
+    }
+  ]
+}
