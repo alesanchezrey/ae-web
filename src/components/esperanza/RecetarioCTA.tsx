@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useRevelar } from "@/hooks/useProgresoScroll";
 import { recetas } from "@/lib/esperanza";
 
-const palabras = ["Más", "de", "18", "recetas", "de", "la", "cocina", "venezolana"];
+const palabras = ["Más\u00a0", "de\u00a0", "18", "recetas\u00a0", "de\u00a0", "la", "cocina\u00a0", "venezolana"];
 const destacadas = ["arroz-con-pollo", "arepas-clasicas", "torta-de-auyama"];
 
 export function RecetarioCTA() {
@@ -34,7 +34,7 @@ export function RecetarioCTA() {
                     transition: `transform .85s cubic-bezier(.16,1,.3,1) ${85 * i}ms, opacity .6s ease ${85 * i}ms`,
                   }}
                 >
-                  {p === "18" ? <span className="text-trigo">{recetas.length}</span> : p}
+                  {p === "18" ? <span className="text-trigo">&nbsp;{recetas.length}&nbsp;</span> : p}
                 </span>
                 {i < palabras.length - 1 && <span> </span>}
               </span>
