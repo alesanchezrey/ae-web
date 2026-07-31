@@ -9,6 +9,7 @@ import { Frase } from "@/components/esperanza/Frase";
 import { Origen } from "@/components/esperanza/Origen";
 import { Distribucion } from "@/components/esperanza/Distribucion";
 import { Contacto } from "@/components/esperanza/Contacto";
+import { GrupoEmpresarial } from "@/components/esperanza/GrupoEmpresarial";
 
 const titulo = "Alimentos Esperanza — El sabor de la familia";
 const descripcion =
@@ -43,6 +44,7 @@ function Inicio() {
       <Origen />
       <Distribucion />
       <Contacto />
+      <GrupoEmpresarial />
     </>
   );
 }
