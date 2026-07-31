@@ -34,7 +34,7 @@ export function RecetarioCTA() {
                     transition: `transform .85s cubic-bezier(.16,1,.3,1) ${85 * i}ms, opacity .6s ease ${85 * i}ms`,
                   }}
                 >
-                  {p === "18" ? <span className="text-trigo">{recetas.length}</span> : p}
+                  {p === "18" ? <span className="text-trigo">&nbsp;{recetas.length}&nbsp;</span> : p}
                 </span>
                 {i < palabras.length - 1 && <span> </span>}
               </span>
