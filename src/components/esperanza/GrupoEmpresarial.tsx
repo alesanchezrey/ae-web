@@ -1,7 +1,7 @@
 import { useRevelar } from "@/hooks/useProgresoScroll";
 import esperanzaLogo from "@/assets/alimentos-esperanza.png.asset.json";
 import vrTradeLogo from "@/assets/vr-trade.png.asset.json";
-import agricolaLogo from "@/assets/agricola-vr.jpg.asset.json";
+import agricolaLogo from "@/assets/agricola-vr.png.asset.json";
 
 const empresas = [
   { nombre: "Alimentos Esperanza", src: esperanzaLogo.url },
