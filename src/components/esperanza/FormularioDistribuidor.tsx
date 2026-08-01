@@ -9,11 +9,11 @@ export function abrirFormularioDistribuidor() {
 
 const esquema = z.object({
   nombre: z.string().trim().min(2, "Ingresa tu nombre").max(100, "Máximo 100 caracteres"),
-  empresa: z.string().trim().max(120, "Máximo 120 caracteres").optional(),
+  empresa: z.string().trim().max(120, "Máximo 120 caracteres"),
   email: z.string().trim().email("Correo inválido").max(255, "Máximo 255 caracteres"),
   telefono: z.string().trim().min(7, "Ingresa un teléfono válido").max(30, "Máximo 30 caracteres"),
   ciudad: z.string().trim().min(2, "Ingresa tu ciudad o estado").max(120, "Máximo 120 caracteres"),
-  mensaje: z.string().trim().max(1000, "Máximo 1000 caracteres").optional(),
+  mensaje: z.string().trim().max(1000, "Máximo 1000 caracteres"),
 });
 
 type Campos = z.infer<typeof esquema>;
@@ -126,7 +126,7 @@ export function FormularioDistribuidor() {
             </p>
 
             <form onSubmit={enviar} noValidate className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <Campo label="Nombre y apellido" error={errores.nombre}>
+              <Campo label="Nombre y apellido" error={errores["nombre"]}>
                 <input
                   className={campoClase}
                   value={valores.nombre}
@@ -135,7 +135,7 @@ export function FormularioDistribuidor() {
                   autoComplete="name"
                 />
               </Campo>
-              <Campo label="Empresa (opcional)" error={errores.empresa}>
+              <Campo label="Empresa (opcional)" error={errores["empresa"]}>
                 <input
                   className={campoClase}
                   value={valores.empresa}
@@ -144,7 +144,7 @@ export function FormularioDistribuidor() {
                   autoComplete="organization"
                 />
               </Campo>
-              <Campo label="Correo electrónico" error={errores.email}>
+              <Campo label="Correo electrónico" error={errores["email"]}>
                 <input
                   type="email"
                   className={campoClase}
@@ -154,7 +154,7 @@ export function FormularioDistribuidor() {
                   autoComplete="email"
                 />
               </Campo>
-              <Campo label="Teléfono" error={errores.telefono}>
+              <Campo label="Teléfono" error={errores["telefono"]}>
                 <input
                   type="tel"
                   className={campoClase}
@@ -164,7 +164,7 @@ export function FormularioDistribuidor() {
                   autoComplete="tel"
                 />
               </Campo>
-              <Campo label="Ciudad / estado" error={errores.ciudad} ancho>
+              <Campo label="Ciudad / estado" error={errores["ciudad"]} ancho>
                 <input
                   className={campoClase}
                   value={valores.ciudad}
@@ -172,7 +172,7 @@ export function FormularioDistribuidor() {
                   maxLength={120}
                 />
               </Campo>
-              <Campo label="Mensaje (opcional)" error={errores.mensaje} ancho>
+              <Campo label="Mensaje (opcional)" error={errores["mensaje"]} ancho>
                 <textarea
                   rows={4}
                   className={`${campoClase} resize-none`}
@@ -201,8 +201,8 @@ function Campo({
   children,
 }: {
   label: string;
-  error?: string;
-  ancho?: boolean;
+  error?: string | undefined;
+  ancho?: boolean | undefined;
   children: React.ReactNode;
 }) {
   return (
