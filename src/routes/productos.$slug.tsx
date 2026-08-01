@@ -109,7 +109,7 @@ function DetalleProducto() {
               rel="noopener noreferrer"
               className="btn btn-esperanza mt-12"
             >
-              Pedir por Instagram
+              SER DISTRIBUIDOR
             </a>
           </div>
         </div>
