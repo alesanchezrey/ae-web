@@ -1,5 +1,6 @@
 import { useRevelar } from "@/hooks/useProgresoScroll";
 import { INSTAGRAM } from "@/lib/esperanza";
+import { abrirFormularioDistribuidor } from "./FormularioDistribuidor";
 
 export function Contacto() {
   const { ref, visible } = useRevelar<HTMLDivElement>(0.2);
@@ -24,14 +25,13 @@ export function Contacto() {
             <p className="mt-8 max-w-md text-lg leading-relaxed text-tinta-suave">
               Pedidos, distribución y alianzas — llena el formulario y nos pondremos en contacto.
             </p>
-            <a
-              href={INSTAGRAM}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={abrirFormularioDistribuidor}
               className="btn btn-esperanza mt-10"
             >
               SER DISTRIBUIDOR
-            </a>
+            </button>
           </div>
         </div>
         <div className="md:col-span-6 md:pt-4">

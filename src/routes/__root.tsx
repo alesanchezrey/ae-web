@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/esperanza/Header";
 import { Footer } from "@/components/esperanza/Footer";
+import { FormularioDistribuidor } from "@/components/esperanza/FormularioDistribuidor";
 
 function NotFoundComponent() {
   return (
@@ -147,6 +148,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <Footer />
+      <FormularioDistribuidor />
     </QueryClientProvider>
   );
 }
