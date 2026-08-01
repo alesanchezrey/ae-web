@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import {
-  INSTAGRAM,
   productoPorSlug,
   productos,
   recetasDeProducto,
