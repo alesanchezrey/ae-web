@@ -147,6 +147,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <Footer />
+      <FormularioDistribuidor />
     </QueryClientProvider>
   );
 }
