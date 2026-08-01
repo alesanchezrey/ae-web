@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { INSTAGRAM } from "@/lib/esperanza";
+import { abrirFormularioDistribuidor } from "./FormularioDistribuidor";
 
 const enlaces = [
   { label: "Productos", href: "/#productos" },
@@ -61,14 +61,13 @@ export function Header() {
           <Link to="/recetario" className="btn btn-esperanza">
             Recetario
           </Link>
-          <a
-            href={INSTAGRAM}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={abrirFormularioDistribuidor}
             className="btn btn-linea text-white"
           >
             Contactar
-          </a>
+          </button>
         </div>
         <button
           type="button"
@@ -97,14 +96,16 @@ export function Header() {
             <Link to="/recetario" className="btn btn-esperanza">
               Recetario
             </Link>
-            <a
-              href={INSTAGRAM}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => {
+                setAbierto(false);
+                abrirFormularioDistribuidor();
+              }}
               className="btn btn-linea text-white"
             >
               Contactar
-            </a>
+            </button>
           </div>
         </div>
       )}

@@ -7,6 +7,7 @@ import {
   type Producto,
 } from "@/lib/esperanza";
 import { useRevelar } from "@/hooks/useProgresoScroll";
+import { abrirFormularioDistribuidor } from "@/components/esperanza/FormularioDistribuidor";
 
 export const Route = createFileRoute("/productos/$slug")({
   loader: ({ params }) => {
@@ -103,14 +104,13 @@ function DetalleProducto() {
                 </div>
               ))}
             </dl>
-            <a
-              href={INSTAGRAM}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={abrirFormularioDistribuidor}
               className="btn btn-esperanza mt-12"
             >
               SER DISTRIBUIDOR
-            </a>
+            </button>
           </div>
         </div>
       </section>
