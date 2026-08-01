@@ -22,7 +22,7 @@ export function Contacto() {
               Hablemos
             </h2>
             <p className="mt-8 max-w-md text-lg leading-relaxed text-tinta-suave">
-              Pedidos, distribución y alianzas — directo por Instagram.
+              Pedidos, distribución y alianzas — llena el formulario y nos pondremos en contacto.
             </p>
             <a
               href={INSTAGRAM}
@@ -30,7 +30,7 @@ export function Contacto() {
               rel="noopener noreferrer"
               className="btn btn-esperanza mt-10"
             >
-              CONTÁCTANOS
+              SER DISTRIBUIDOR
             </a>
           </div>
         </div>
