@@ -30,7 +30,7 @@ export function Contacto() {
               rel="noopener noreferrer"
               className="btn btn-esperanza mt-10"
             >
-              Escribir por Instagram
+              CONTÁCTANOS
             </a>
           </div>
         </div>
