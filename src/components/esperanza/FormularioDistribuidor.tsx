@@ -119,7 +119,7 @@ export function FormularioDistribuidor() {
           <>
             <p className="antetitulo mb-4 text-esperanza">Distribuidores</p>
             <h2 className="font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-[0.95] tracking-[-0.02em] text-tinta">
-              Ser distribuidor
+              Ser Distribuidor
             </h2>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-tinta-suave">
               Cuéntanos sobre tu negocio y nos pondremos en contacto contigo.
