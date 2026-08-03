@@ -3,6 +3,9 @@ import { z } from "zod";
 
 const EVENTO = "esperanza:abrir-distribuidor";
 
+const WEB3FORMS_ACCESS_KEY = "7305d7ee-766e-46eb-be56-cd53f7062661";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+
 export function abrirFormularioDistribuidor() {
   window.dispatchEvent(new CustomEvent(EVENTO));
 }
@@ -32,10 +35,14 @@ export function FormularioDistribuidor() {
   const [valores, setValores] = useState<Campos>(inicial);
   const [errores, setErrores] = useState<Record<string, string>>({});
   const [enviado, setEnviado] = useState(false);
+  const [enviando, setEnviando] = useState(false);
+  const [errorEnvio, setErrorEnvio] = useState<string | null>(null);
 
   useEffect(() => {
     const abrir = () => {
       setEnviado(false);
+      setEnviando(false);
+      setErrorEnvio(null);
       setErrores({});
       setAbierto(true);
     };
@@ -63,8 +70,9 @@ export function FormularioDistribuidor() {
     setValores((v) => ({ ...v, [campo]: e.target.value }));
   };
 
-  const enviar = (e: React.FormEvent) => {
+  const enviar = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (enviando) return;
     const r = esquema.safeParse(valores);
     if (!r.success) {
       const errs: Record<string, string> = {};
@@ -73,8 +81,39 @@ export function FormularioDistribuidor() {
       return;
     }
     setErrores({});
-    setEnviado(true);
-    setValores(inicial);
+    setErrorEnvio(null);
+    setEnviando(true);
+    try {
+      const respuesta = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "Nueva solicitud de distribuidor — Alimentos Esperanza",
+          from_name: "Alimentos Esperanza",
+          nombre: r.data.nombre,
+          empresa: r.data.empresa || "—",
+          email: r.data.email,
+          telefono: r.data.telefono,
+          ciudad: r.data.ciudad,
+          mensaje: r.data.mensaje || "—",
+        }),
+      });
+      const datos = (await respuesta.json().catch(() => null)) as { success?: boolean; message?: string } | null;
+      if (!respuesta.ok || !datos?.success) {
+        throw new Error(datos?.message ?? "No pudimos enviar tu solicitud.");
+      }
+      setEnviado(true);
+      setValores(inicial);
+    } catch (err) {
+      setErrorEnvio(
+        err instanceof Error
+          ? err.message
+          : "Ocurrió un error al enviar. Intenta nuevamente en unos minutos.",
+      );
+    } finally {
+      setEnviando(false);
+    }
   };
 
   const campoClase =
@@ -182,8 +221,28 @@ export function FormularioDistribuidor() {
                 />
               </Campo>
               <div className="sm:col-span-2">
-                <button type="submit" className="btn btn-esperanza w-full sm:w-auto">
-                  ENVIAR SOLICITUD
+                {errorEnvio && (
+                  <p role="alert" className="mb-4 text-sm text-esperanza">
+                    {errorEnvio}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={enviando}
+                  aria-busy={enviando}
+                  className="btn btn-esperanza w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+                >
+                  {enviando ? (
+                    <span className="inline-flex items-center gap-2">
+                      <span
+                        aria-hidden="true"
+                        className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+                      />
+                      ENVIANDO...
+                    </span>
+                  ) : (
+                    "ENVIAR SOLICITUD"
+                  )}
                 </button>
               </div>
             </form>
