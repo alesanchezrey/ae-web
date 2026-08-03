@@ -70,8 +70,9 @@ export function FormularioDistribuidor() {
     setValores((v) => ({ ...v, [campo]: e.target.value }));
   };
 
-  const enviar = (e: React.FormEvent) => {
+  const enviar = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (enviando) return;
     const r = esquema.safeParse(valores);
     if (!r.success) {
       const errs: Record<string, string> = {};
@@ -80,8 +81,39 @@ export function FormularioDistribuidor() {
       return;
     }
     setErrores({});
-    setEnviado(true);
-    setValores(inicial);
+    setErrorEnvio(null);
+    setEnviando(true);
+    try {
+      const respuesta = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "Nueva solicitud de distribuidor — Alimentos Esperanza",
+          from_name: "Alimentos Esperanza",
+          nombre: r.data.nombre,
+          empresa: r.data.empresa || "—",
+          email: r.data.email,
+          telefono: r.data.telefono,
+          ciudad: r.data.ciudad,
+          mensaje: r.data.mensaje || "—",
+        }),
+      });
+      const datos = (await respuesta.json().catch(() => null)) as { success?: boolean; message?: string } | null;
+      if (!respuesta.ok || !datos?.success) {
+        throw new Error(datos?.message ?? "No pudimos enviar tu solicitud.");
+      }
+      setEnviado(true);
+      setValores(inicial);
+    } catch (err) {
+      setErrorEnvio(
+        err instanceof Error
+          ? err.message
+          : "Ocurrió un error al enviar. Intenta nuevamente en unos minutos.",
+      );
+    } finally {
+      setEnviando(false);
+    }
   };
 
   const campoClase =
