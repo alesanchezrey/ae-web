@@ -35,10 +35,14 @@ export function FormularioDistribuidor() {
   const [valores, setValores] = useState<Campos>(inicial);
   const [errores, setErrores] = useState<Record<string, string>>({});
   const [enviado, setEnviado] = useState(false);
+  const [enviando, setEnviando] = useState(false);
+  const [errorEnvio, setErrorEnvio] = useState<string | null>(null);
 
   useEffect(() => {
     const abrir = () => {
       setEnviado(false);
+      setEnviando(false);
+      setErrorEnvio(null);
       setErrores({});
       setAbierto(true);
     };
