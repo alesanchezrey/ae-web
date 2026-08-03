@@ -3,6 +3,9 @@ import { z } from "zod";
 
 const EVENTO = "esperanza:abrir-distribuidor";
 
+const WEB3FORMS_ACCESS_KEY = "7305d7ee-766e-46eb-be56-cd53f7062661";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+
 export function abrirFormularioDistribuidor() {
   window.dispatchEvent(new CustomEvent(EVENTO));
 }
