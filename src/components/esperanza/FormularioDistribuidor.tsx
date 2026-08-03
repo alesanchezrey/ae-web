@@ -221,8 +221,28 @@ export function FormularioDistribuidor() {
                 />
               </Campo>
               <div className="sm:col-span-2">
-                <button type="submit" className="btn btn-esperanza w-full sm:w-auto">
-                  ENVIAR SOLICITUD
+                {errorEnvio && (
+                  <p role="alert" className="mb-4 text-sm text-esperanza">
+                    {errorEnvio}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={enviando}
+                  aria-busy={enviando}
+                  className="btn btn-esperanza w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+                >
+                  {enviando ? (
+                    <span className="inline-flex items-center gap-2">
+                      <span
+                        aria-hidden="true"
+                        className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+                      />
+                      ENVIANDO...
+                    </span>
+                  ) : (
+                    "ENVIAR SOLICITUD"
+                  )}
                 </button>
               </div>
             </form>
