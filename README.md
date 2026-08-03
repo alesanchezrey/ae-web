@@ -1,16 +1,5 @@
 # AE Web
 
-Necesito crear una copia exacta de un sitio. Esta compuesto por las siguientes paginas:
-
-Inicio: https://alimentosesperanza.netlify.app/
-Recetario: https://alimentosesperanza.netlify.app/recetario/
-Detalle de cada producto (ejemplo de como debe ser la base): https://alimentosesperanza.netlify.app/productos/arroz-blanco-tipo-1-900g/
-Detalle de cada receta (ejemplo de como debe ser la base): https://alimentosesperanza.netlify.app/recetario/cachapas/
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://ae-web.lovable.app
-
 ## Build with Lovable
 
 Continue developing this project in the [Lovable editor](https://lovable.dev/projects/e99cff18-cbc9-48af-badb-7e0230fa5ef9).
