@@ -10,6 +10,7 @@ import { Origen } from "@/components/esperanza/Origen";
 import { Distribucion } from "@/components/esperanza/Distribucion";
 import { Contacto } from "@/components/esperanza/Contacto";
 import { GrupoEmpresarial } from "@/components/esperanza/GrupoEmpresarial";
+import { urlAbsoluta } from "@/lib/site";
 
 const titulo = "Alimentos Esperanza — El sabor de la familia";
 const descripcion =
