@@ -1,10 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 
 const EVENTO = "esperanza:abrir-distribuidor";
 
 const WEB3FORMS_ACCESS_KEY = "7305d7ee-766e-46eb-be56-cd53f7062661";
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+// Clave de sitio hCaptcha provista por Web3Forms
+const HCAPTCHA_SITE_KEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
+const HCAPTCHA_SCRIPT = "https://js.hcaptcha.com/1/api.js?render=explicit";
+
+declare global {
+  interface Window {
+    hcaptcha?: {
+      render: (
+        el: HTMLElement,
+        opts: {
+          sitekey: string;
+          callback?: (token: string) => void;
+          "expired-callback"?: () => void;
+          "error-callback"?: () => void;
+        },
+      ) => string;
+      reset: (id?: string) => void;
+    };
+  }
+}
+
+function cargarHcaptcha(): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve();
+  if (window.hcaptcha) return Promise.resolve();
+  const existente = document.querySelector<HTMLScriptElement>(`script[src="${HCAPTCHA_SCRIPT}"]`);
+  if (existente) {
+    return new Promise((res) => existente.addEventListener("load", () => res(), { once: true }));
+  }
+  return new Promise((res, rej) => {
+    const s = document.createElement("script");
+    s.src = HCAPTCHA_SCRIPT;
+    s.async = true;
+    s.defer = true;
+    s.onload = () => res();
+    s.onerror = () => rej(new Error("No se pudo cargar hCaptcha"));
+    document.head.appendChild(s);
+  });
+}
 
 export function abrirFormularioDistribuidor() {
   window.dispatchEvent(new CustomEvent(EVENTO));
