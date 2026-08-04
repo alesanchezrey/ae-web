@@ -147,6 +147,10 @@ export function FormularioDistribuidor() {
       return;
     }
     setErrores({});
+    if (!captcha) {
+      setErrorEnvio("Completa la verificación de seguridad.");
+      return;
+    }
     setErrorEnvio(null);
     setEnviando(true);
     try {
@@ -163,6 +167,7 @@ export function FormularioDistribuidor() {
           telefono: r.data.telefono,
           ciudad: r.data.ciudad,
           mensaje: r.data.mensaje || "—",
+          "h-captcha-response": captcha,
         }),
       });
       const datos = (await respuesta.json().catch(() => null)) as { success?: boolean; message?: string } | null;
@@ -171,12 +176,17 @@ export function FormularioDistribuidor() {
       }
       setEnviado(true);
       setValores(inicial);
+      setCaptcha(null);
     } catch (err) {
       setErrorEnvio(
         err instanceof Error
           ? err.message
           : "Ocurrió un error al enviar. Intenta nuevamente en unos minutos.",
       );
+      setCaptcha(null);
+      if (window.hcaptcha && widgetRef.current !== null) {
+        window.hcaptcha.reset(widgetRef.current);
+      }
     } finally {
       setEnviando(false);
     }
