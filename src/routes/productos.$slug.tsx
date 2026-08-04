@@ -5,6 +5,7 @@ import {
   recetasDeProducto,
   type Producto,
 } from "@/lib/esperanza";
+import { urlAbsoluta } from "@/lib/site";
 import { useRevelar } from "@/hooks/useProgresoScroll";
 import { abrirFormularioDistribuidor } from "@/components/esperanza/FormularioDistribuidor";
 
@@ -25,6 +26,8 @@ export const Route = createFileRoute("/productos/$slug")({
     }
     const p = loaderData.producto;
     const titulo = `${p.nombre} ${p.presentacion} — Alimentos Esperanza`;
+    const url = urlAbsoluta(`/productos/${params.slug}`);
+    const imagen = urlAbsoluta(p.imagen);
     return {
       meta: [
         { title: titulo },
@@ -32,10 +35,12 @@ export const Route = createFileRoute("/productos/$slug")({
         { property: "og:title", content: titulo },
         { property: "og:description", content: p.descripcionLarga },
         { property: "og:type", content: "product" },
-        { property: "og:url", content: `/productos/${params.slug}` },
+        { property: "og:url", content: url },
+        { property: "og:image", content: imagen },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: imagen },
       ],
-      links: [{ rel: "canonical", href: `/productos/${params.slug}` }],
+      links: [{ rel: "canonical", href: url }],
       scripts: [
         {
           type: "application/ld+json",
@@ -44,7 +49,8 @@ export const Route = createFileRoute("/productos/$slug")({
             "@type": "Product",
             name: `${p.nombre} ${p.presentacion}`,
             description: p.descripcionLarga,
-            image: p.imagen,
+            image: imagen,
+            url,
             brand: { "@type": "Brand", name: "Alimentos Esperanza" },
           }),
         },

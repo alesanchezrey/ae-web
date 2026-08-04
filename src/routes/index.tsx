@@ -10,10 +10,12 @@ import { Origen } from "@/components/esperanza/Origen";
 import { Distribucion } from "@/components/esperanza/Distribucion";
 import { Contacto } from "@/components/esperanza/Contacto";
 import { GrupoEmpresarial } from "@/components/esperanza/GrupoEmpresarial";
+import { urlAbsoluta } from "@/lib/site";
 
 const titulo = "Alimentos Esperanza — El sabor de la familia";
 const descripcion =
   "Empresa agroindustrial venezolana de Portuguesa: harina de maíz, arroz, aceite de soya y azúcar refinada para cada mesa del país.";
+const imagen = urlAbsoluta("/fotos/linea-esperanza-poster.jpg");
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,10 +25,12 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: titulo },
       { property: "og:description", content: descripcion },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: urlAbsoluta("/") },
+      { property: "og:image", content: imagen },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: imagen },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: urlAbsoluta("/") }],
   }),
   component: Inicio,
 });

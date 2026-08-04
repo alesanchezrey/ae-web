@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/esperanza/Header";
 import { Footer } from "@/components/esperanza/Footer";
 import { FormularioDistribuidor } from "@/components/esperanza/FormularioDistribuidor";
+import { SITE_URL, urlAbsoluta } from "@/lib/site";
 
 function NotFoundComponent() {
   return (
@@ -109,8 +110,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "Alimentos Esperanza",
-          url: "/",
-          logo: "/brand/logo-esperanza-productos.svg",
+          url: SITE_URL,
+          logo: urlAbsoluta("/brand/logo-esperanza-productos.svg"),
           address: {
             "@type": "PostalAddress",
             streetAddress:

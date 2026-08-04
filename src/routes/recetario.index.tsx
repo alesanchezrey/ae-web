@@ -1,11 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { categorias, recetas } from "@/lib/esperanza";
+import { urlAbsoluta } from "@/lib/site";
 import { useRevelar } from "@/hooks/useProgresoScroll";
 
 const titulo = "Recetario Esperanza — La cocina venezolana, receta por receta";
 const descripcion =
   "18 recetas venezolanas hechas con los productos Esperanza: arepas, cachapas, tequeños, quesillo y más.";
+const imagen = urlAbsoluta(recetas[0]?.imagen ?? "/fotos/linea-esperanza-poster.jpg");
 
 export const Route = createFileRoute("/recetario/")({
   head: () => ({
@@ -15,10 +17,12 @@ export const Route = createFileRoute("/recetario/")({
       { property: "og:title", content: titulo },
       { property: "og:description", content: descripcion },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/recetario" },
+      { property: "og:url", content: urlAbsoluta("/recetario") },
+      { property: "og:image", content: imagen },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: imagen },
     ],
-    links: [{ rel: "canonical", href: "/recetario" }],
+    links: [{ rel: "canonical", href: urlAbsoluta("/recetario") }],
   }),
   component: Recetario,
 });
