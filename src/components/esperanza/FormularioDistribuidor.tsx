@@ -1,48 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 
 const EVENTO = "esperanza:abrir-distribuidor";
 
 const WEB3FORMS_ACCESS_KEY = "7305d7ee-766e-46eb-be56-cd53f7062661";
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
-// Clave de sitio hCaptcha provista por Web3Forms
-const HCAPTCHA_SITE_KEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
-const HCAPTCHA_SCRIPT = "https://js.hcaptcha.com/1/api.js?render=explicit";
-
-declare global {
-  interface Window {
-    hcaptcha?: {
-      render: (
-        el: HTMLElement,
-        opts: {
-          sitekey: string;
-          callback?: (token: string) => void;
-          "expired-callback"?: () => void;
-          "error-callback"?: () => void;
-        },
-      ) => string;
-      reset: (id?: string) => void;
-    };
-  }
-}
-
-function cargarHcaptcha(): Promise<void> {
-  if (typeof window === "undefined") return Promise.resolve();
-  if (window.hcaptcha) return Promise.resolve();
-  const existente = document.querySelector<HTMLScriptElement>(`script[src="${HCAPTCHA_SCRIPT}"]`);
-  if (existente) {
-    return new Promise((res) => existente.addEventListener("load", () => res(), { once: true }));
-  }
-  return new Promise((res, rej) => {
-    const s = document.createElement("script");
-    s.src = HCAPTCHA_SCRIPT;
-    s.async = true;
-    s.defer = true;
-    s.onload = () => res();
-    s.onerror = () => rej(new Error("No se pudo cargar hCaptcha"));
-    document.head.appendChild(s);
-  });
-}
 
 export function abrirFormularioDistribuidor() {
   window.dispatchEvent(new CustomEvent(EVENTO));
@@ -75,9 +37,6 @@ export function FormularioDistribuidor() {
   const [enviado, setEnviado] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [errorEnvio, setErrorEnvio] = useState<string | null>(null);
-  const [captcha, setCaptcha] = useState<string | null>(null);
-  const captchaRef = useRef<HTMLDivElement | null>(null);
-  const widgetRef = useRef<string | null>(null);
 
   useEffect(() => {
     const abrir = () => {
@@ -85,7 +44,6 @@ export function FormularioDistribuidor() {
       setEnviando(false);
       setErrorEnvio(null);
       setErrores({});
-      setCaptcha(null);
       setAbierto(true);
     };
     window.addEventListener(EVENTO, abrir);
@@ -106,30 +64,6 @@ export function FormularioDistribuidor() {
     };
   }, [abierto]);
 
-  useEffect(() => {
-    if (!abierto || enviado) {
-      widgetRef.current = null;
-      return;
-    }
-    let cancelado = false;
-    cargarHcaptcha()
-      .then(() => {
-        if (cancelado || !captchaRef.current || !window.hcaptcha) return;
-        if (widgetRef.current !== null) return;
-        captchaRef.current.innerHTML = "";
-        widgetRef.current = window.hcaptcha.render(captchaRef.current, {
-          sitekey: HCAPTCHA_SITE_KEY,
-          callback: (token: string) => setCaptcha(token),
-          "expired-callback": () => setCaptcha(null),
-          "error-callback": () => setCaptcha(null),
-        });
-      })
-      .catch(() => setErrorEnvio("No se pudo cargar la verificación de seguridad."));
-    return () => {
-      cancelado = true;
-    };
-  }, [abierto, enviado]);
-
   if (!abierto) return null;
 
   const set = (campo: keyof Campos) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -147,10 +81,6 @@ export function FormularioDistribuidor() {
       return;
     }
     setErrores({});
-    if (!captcha) {
-      setErrorEnvio("Completa la verificación de seguridad.");
-      return;
-    }
     setErrorEnvio(null);
     setEnviando(true);
     try {
@@ -167,7 +97,6 @@ export function FormularioDistribuidor() {
           telefono: r.data.telefono,
           ciudad: r.data.ciudad,
           mensaje: r.data.mensaje || "—",
-          "h-captcha-response": captcha,
         }),
       });
       const datos = (await respuesta.json().catch(() => null)) as { success?: boolean; message?: string } | null;
@@ -176,17 +105,12 @@ export function FormularioDistribuidor() {
       }
       setEnviado(true);
       setValores(inicial);
-      setCaptcha(null);
     } catch (err) {
       setErrorEnvio(
         err instanceof Error
           ? err.message
           : "Ocurrió un error al enviar. Intenta nuevamente en unos minutos.",
       );
-      setCaptcha(null);
-      if (window.hcaptcha && widgetRef.current !== null) {
-        window.hcaptcha.reset(widgetRef.current);
-      }
     } finally {
       setEnviando(false);
     }
@@ -297,10 +221,6 @@ export function FormularioDistribuidor() {
                 />
               </Campo>
               <div className="sm:col-span-2">
-                <div ref={captchaRef} className="mb-5" />
-              </div>
-              <div className="sm:col-span-2">
-
                 {errorEnvio && (
                   <p role="alert" className="mb-4 text-sm text-esperanza">
                     {errorEnvio}
