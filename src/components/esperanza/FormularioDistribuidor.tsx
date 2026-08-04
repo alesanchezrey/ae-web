@@ -75,6 +75,9 @@ export function FormularioDistribuidor() {
   const [enviado, setEnviado] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [errorEnvio, setErrorEnvio] = useState<string | null>(null);
+  const [captcha, setCaptcha] = useState<string | null>(null);
+  const captchaRef = useRef<HTMLDivElement | null>(null);
+  const widgetRef = useRef<string | null>(null);
 
   useEffect(() => {
     const abrir = () => {
@@ -82,6 +85,7 @@ export function FormularioDistribuidor() {
       setEnviando(false);
       setErrorEnvio(null);
       setErrores({});
+      setCaptcha(null);
       setAbierto(true);
     };
     window.addEventListener(EVENTO, abrir);
@@ -101,6 +105,30 @@ export function FormularioDistribuidor() {
       document.body.style.overflow = previo;
     };
   }, [abierto]);
+
+  useEffect(() => {
+    if (!abierto || enviado) {
+      widgetRef.current = null;
+      return;
+    }
+    let cancelado = false;
+    cargarHcaptcha()
+      .then(() => {
+        if (cancelado || !captchaRef.current || !window.hcaptcha) return;
+        if (widgetRef.current !== null) return;
+        captchaRef.current.innerHTML = "";
+        widgetRef.current = window.hcaptcha.render(captchaRef.current, {
+          sitekey: HCAPTCHA_SITE_KEY,
+          callback: (token: string) => setCaptcha(token),
+          "expired-callback": () => setCaptcha(null),
+          "error-callback": () => setCaptcha(null),
+        });
+      })
+      .catch(() => setErrorEnvio("No se pudo cargar la verificación de seguridad."));
+    return () => {
+      cancelado = true;
+    };
+  }, [abierto, enviado]);
 
   if (!abierto) return null;
 
