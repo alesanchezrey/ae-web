@@ -89,6 +89,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "Alimentos Esperanza" },
       { property: "og:site_name", content: "Alimentos Esperanza" },
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "Alimentos Esperanza — El sabor de la familia" },
+      {
+        property: "og:description",
+        content:
+          "Alimentos esenciales para cada mesa de Venezuela: harina de maíz, arroz, aceite de soya y azúcar refinada.",
+      },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
