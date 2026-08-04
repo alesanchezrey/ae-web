@@ -5,6 +5,7 @@ import {
   recetas,
   type Receta,
 } from "@/lib/esperanza";
+import { urlAbsoluta } from "@/lib/site";
 import { useRevelar } from "@/hooks/useProgresoScroll";
 
 export const Route = createFileRoute("/recetario/$slug")({
@@ -22,6 +23,8 @@ export const Route = createFileRoute("/recetario/$slug")({
     const r = loaderData.receta;
     const titulo = `${r.nombre} — Recetario Esperanza`;
     const descripcion = `${r.nombre}: receta venezolana para ${r.porciones} en ${r.tiempo}, con productos Alimentos Esperanza.`;
+    const url = urlAbsoluta(`/recetario/${params.slug}`);
+    const imagen = urlAbsoluta(r.imagen);
     return {
       meta: [
         { title: titulo },
@@ -29,10 +32,12 @@ export const Route = createFileRoute("/recetario/$slug")({
         { property: "og:title", content: titulo },
         { property: "og:description", content: descripcion },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: `/recetario/${params.slug}` },
+        { property: "og:url", content: url },
+        { property: "og:image", content: imagen },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: imagen },
       ],
-      links: [{ rel: "canonical", href: `/recetario/${params.slug}` }],
+      links: [{ rel: "canonical", href: url }],
       scripts: [
         {
           type: "application/ld+json",
@@ -40,6 +45,8 @@ export const Route = createFileRoute("/recetario/$slug")({
             "@context": "https://schema.org",
             "@type": "Recipe",
             name: r.nombre,
+            image: imagen,
+            url,
             recipeCategory: r.categorias[0],
             recipeYield: r.porciones,
             totalTime: r.tiempo,
