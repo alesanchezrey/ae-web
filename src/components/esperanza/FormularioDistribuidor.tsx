@@ -297,6 +297,10 @@ export function FormularioDistribuidor() {
                 />
               </Campo>
               <div className="sm:col-span-2">
+                <div ref={captchaRef} className="mb-5" />
+              </div>
+              <div className="sm:col-span-2">
+
                 {errorEnvio && (
                   <p role="alert" className="mb-4 text-sm text-esperanza">
                     {errorEnvio}
