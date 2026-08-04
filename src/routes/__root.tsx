@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/esperanza/Header";
 import { Footer } from "@/components/esperanza/Footer";
 import { FormularioDistribuidor } from "@/components/esperanza/FormularioDistribuidor";
+import { SITE_URL, urlAbsoluta } from "@/lib/site";
 
 function NotFoundComponent() {
   return (
