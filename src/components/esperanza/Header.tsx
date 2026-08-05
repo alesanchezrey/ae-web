@@ -4,6 +4,7 @@ import { abrirFormularioDistribuidor } from "./FormularioDistribuidor";
 
 const enlaces = [
   { label: "Productos", href: "/#productos" },
+  { label: "Lanzamientos", href: "/lanzamientos" },
   { label: "Recetario", href: "/recetario" },
   { label: "Origen", href: "/#origen" },
   { label: "Contacto", href: "/#contacto" },
