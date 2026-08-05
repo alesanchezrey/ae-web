@@ -28,7 +28,7 @@ export function GrupoEmpresarial() {
         >
           <p className="antetitulo mb-5 text-esperanza">Grupo empresarial</p>
           <h2 className="max-w-3xl font-display text-[clamp(2.4rem,4.4vw,4.4rem)] leading-[0.98] tracking-[-0.02em] text-llano">
-            Las empresas que nos componen
+            Nuestro grupo empresarial
           </h2>
           <div className="surco mt-7 w-32" />
         </div>
