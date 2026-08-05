@@ -38,8 +38,9 @@ export function Origen() {
             Portuguesa, Venezuela
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/80">
-            El eje cerealero del llano. De la tierra a la mesa, con productores locales
-            que siembran, cosechan y muelen a pocos kilómetros de nuestra planta.
+            Desde los fértiles campos de Portuguesa hasta tu familia, con
+            productores locales que siembran con manos venezolanas, impulsando el
+            desarrollo económico y alimentando el futuro del país.
           </p>
           <div className="surco surco-claro mt-10 w-48" />
         </div>
