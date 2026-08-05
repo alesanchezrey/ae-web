@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { INSTAGRAM, productos } from "@/lib/esperanza";
+import { INSTAGRAM, productosDisponibles } from "@/lib/esperanza";
 
 export function Footer() {
   return (
@@ -22,7 +22,7 @@ export function Footer() {
         <nav className="md:col-span-3" aria-label="Productos">
           <p className="antetitulo mb-5 text-trigo">Productos</p>
           <ul className="space-y-3">
-            {productos.map((p) => (
+            {productosDisponibles.map((p) => (
               <li key={p.slug}>
                 <Link
                   to="/productos/$slug"

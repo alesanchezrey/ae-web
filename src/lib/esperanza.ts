@@ -33,6 +33,20 @@ export type Receta = {
 export const productos = datos.productos as Producto[];
 export const recetas = datos.recetas as Receta[];
 
+/** Productos próximos a lanzarse: no se muestran en "Nuestros Productos". */
+export const slugsLanzamiento = [
+  "harina-de-maiz-precocida",
+  "aceite-de-soya-refinado",
+];
+
+export const productosDisponibles = productos.filter(
+  (p) => !slugsLanzamiento.includes(p.slug),
+);
+
+export const productosLanzamiento = productos.filter((p) =>
+  slugsLanzamiento.includes(p.slug),
+);
+
 export const INSTAGRAM = "https://instagram.com/alimentosesperanza";
 
 export const categorias = [

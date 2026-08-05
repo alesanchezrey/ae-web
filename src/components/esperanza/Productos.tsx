@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useCallback, useRef, useState } from "react";
-import { productos } from "@/lib/esperanza";
+import { productosDisponibles } from "@/lib/esperanza";
 
 export function Productos() {
   const pista = useRef<HTMLDivElement | null>(null);
@@ -59,7 +59,7 @@ export function Productos() {
         ref={pista}
         className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-6 pt-20 md:mt-14 md:gap-6 md:px-12 md:pt-24 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {productos.map((p, i) => {
+        {productosDisponibles.map((p, i) => {
           const act = activo === i;
           return (
             <article
