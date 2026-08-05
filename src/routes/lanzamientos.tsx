@@ -37,7 +37,7 @@ function Lanzamientos() {
         <p className="font-display text-3xl italic text-esperanza md:text-5xl">
           Próximos
         </p>
-        <h1 className="font-display text-[clamp(3.4rem,9.5vw,9.5rem)] font-semibold uppercase leading-[0.88] tracking-[-0.03em] text-tinta">
+        <h1 className="font-display max-w-full break-words text-[clamp(1.7rem,7.5vw,9.5rem)] font-semibold uppercase leading-[0.88] tracking-[-0.03em] text-tinta sm:text-[clamp(3.4rem,9.5vw,9.5rem)]">
           Lanzamientos
         </h1>
         <svg
