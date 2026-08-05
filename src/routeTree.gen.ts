@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LanzamientosRouteImport } from './routes/lanzamientos'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProductosSlugRouteImport } from './routes/productos.$slug'
 import { Route as RecetarioIndexRouteImport } from './routes/recetario.index'
@@ -18,6 +19,11 @@ import { Route as RecetarioSlugRouteImport } from './routes/recetario.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LanzamientosRoute = LanzamientosRouteImport.update({
+  id: '/lanzamientos',
+  path: '/lanzamientos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -43,6 +49,7 @@ const RecetarioSlugRoute = RecetarioSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/lanzamientos': typeof LanzamientosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/productos/$slug': typeof ProductosSlugRoute
   '/recetario/$slug': typeof RecetarioSlugRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/lanzamientos': typeof LanzamientosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/productos/$slug': typeof ProductosSlugRoute
   '/recetario/$slug': typeof RecetarioSlugRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/lanzamientos': typeof LanzamientosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/productos/$slug': typeof ProductosSlugRoute
   '/recetario/$slug': typeof RecetarioSlugRoute
@@ -67,6 +76,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/lanzamientos'
     | '/sitemap.xml'
     | '/productos/$slug'
     | '/recetario/$slug'
@@ -74,6 +84,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/lanzamientos'
     | '/sitemap.xml'
     | '/productos/$slug'
     | '/recetario/$slug'
@@ -81,6 +92,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/lanzamientos'
     | '/sitemap.xml'
     | '/productos/$slug'
     | '/recetario/$slug'
@@ -89,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LanzamientosRoute: typeof LanzamientosRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ProductosSlugRoute: typeof ProductosSlugRoute
   RecetarioSlugRoute: typeof RecetarioSlugRoute
@@ -102,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lanzamientos': {
+      id: '/lanzamientos'
+      path: '/lanzamientos'
+      fullPath: '/lanzamientos'
+      preLoaderRoute: typeof LanzamientosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -137,6 +157,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LanzamientosRoute: LanzamientosRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ProductosSlugRoute: ProductosSlugRoute,
   RecetarioSlugRoute: RecetarioSlugRoute,
@@ -145,13 +166,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
