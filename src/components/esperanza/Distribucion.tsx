@@ -1,27 +1,8 @@
 import { useRevelar } from "@/hooks/useProgresoScroll";
 
-const anaqueles = [
-  {
-    src: "/fotos/anaquel-harina.jpg",
-    alt: "Pasillo de supermercado con Harina de Maíz Precocida Esperanza en anaquel",
-  },
-  {
-    src: "/fotos/anaquel-arroz.jpg",
-    alt: "Cliente tomando un paquete de Arroz Blanco Tipo 1 Esperanza del anaquel",
-  },
-  {
-    src: "/fotos/anaquel-azucar.jpg",
-    alt: "Dos clientas eligiendo Azúcar Refinada Esperanza en el anaquel",
-  },
-  {
-    src: "/fotos/anaquel-aceite.jpg",
-    alt: "Botellas de Aceite de Soya Refinado Esperanza en el anaquel",
-  },
-];
-
 export function Distribucion() {
   const titulo = useRevelar<HTMLDivElement>(0.3);
-  const grilla = useRevelar<HTMLDivElement>(0.2);
+  const video = useRevelar<HTMLDivElement>(0.2);
 
   return (
     <section className="textura-papel bg-white pt-24 md:pt-32">
@@ -42,26 +23,26 @@ export function Distribucion() {
           </h2>
         </div>
       </div>
-      <div ref={grilla.ref} className="mt-16 grid grid-cols-2 md:grid-cols-4">
-        {anaqueles.map((a, i) => (
-          <div
-            key={a.src}
-            style={{
-              clipPath: grilla.visible ? "inset(0 0 0 0)" : "inset(0 0 100% 0)",
-              transform: grilla.visible ? "scale(1)" : "scale(1.06)",
-              transition: `clip-path 1.05s cubic-bezier(.16,1,.3,1) ${i * 100}ms, transform 1.35s cubic-bezier(.16,1,.3,1) ${i * 100}ms`,
-            }}
-          >
-            <div className="relative aspect-[3/4] overflow-hidden sm:aspect-[4/5]">
-              <img
-                src={a.src}
-                alt={a.alt}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-asiento hover:scale-105"
-              />
-            </div>
-          </div>
-        ))}
+      <div
+        ref={video.ref}
+        className="mt-16"
+        style={{
+          clipPath: video.visible ? "inset(0 0 0 0)" : "inset(0 0 100% 0)",
+          transform: video.visible ? "scale(1)" : "scale(1.04)",
+          transition:
+            "clip-path 1.05s cubic-bezier(.16,1,.3,1), transform 1.35s cubic-bezier(.16,1,.3,1)",
+        }}
+      >
+        <div className="relative aspect-video w-full overflow-hidden">
+          <iframe
+            src="https://player.vimeo.com/video/1214133477?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&player_id=0&app_id=58479"
+            title="Distribución Alimentos Esperanza"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+            className="absolute inset-0 h-full w-full border-0"
+          />
+        </div>
       </div>
     </section>
   );
