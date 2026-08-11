@@ -13,7 +13,6 @@ function PlayIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export function Distribucion() {
-  const titulo = useRevelar<HTMLDivElement>(0.3);
   const video = useRevelar<HTMLDivElement>(0.2);
   const [reproduciendo, setReproduciendo] = useState(false);
 
