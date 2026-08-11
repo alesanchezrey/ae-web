@@ -22,23 +22,6 @@ export function Distribucion() {
 
   return (
     <section className="textura-papel bg-white pt-24 md:pt-32">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-        <div
-          ref={titulo.ref}
-          className="max-w-2xl"
-          style={{
-            opacity: titulo.visible ? 1 : 0,
-            transform: titulo.visible ? "translateY(0)" : "translateY(28px)",
-            transition:
-              "opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1)",
-          }}
-        >
-          <p className="antetitulo mb-5 text-esperanza">Distribución</p>
-          <h2 className="font-display text-[clamp(2.6rem,6.4vw,6.2rem)] leading-[0.98] tracking-[-0.02em] text-tinta">
-            En el anaquel de tu bodega, tu abasto y tu supermercado.
-          </h2>
-        </div>
-      </div>
       <div
         ref={video.ref}
         className="mt-16"
