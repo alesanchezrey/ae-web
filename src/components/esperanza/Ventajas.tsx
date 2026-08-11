@@ -3,22 +3,22 @@ import { useRevelar } from "@/hooks/useProgresoScroll";
 const ventajas = [
   {
     titulo: "Ingredientes naturales",
-    texto: "Materia prima seleccionada, sin atajos.",
+    texto: "Procesos de selección y molienda limpios que preservan las propiedades nutricionales esenciales de cada grano y cosecha.",
     d: "M12 22c0-7 4-11 9-12-1 7-4 11-9 12zm0 0C12 15 8 11 3 10c1 7 4 11 9 12z",
   },
   {
     titulo: "Calidad certificada",
-    texto: "Procesos que garantizan cada lote.",
+    texto: "Alimentos confiables nutritivos y accesibles con los mejores estándares en controles de calidad, honrando el esfuerzo del campo y respaldando la confianza de nuestros consumidores",
     d: "M12 2l8 3v7c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5l8-3zm-1 13l6-6-1.5-1.5L11 12l-2.5-2.5L7 11l4 4z",
   },
   {
     titulo: "Hecho para la familia",
-    texto: "La mesa venezolana de todos los días.",
+    texto: "Productos nutritivos, sanos y seguros para disfrutar en cada mesa venezolana.",
     d: "M12 21C7 17 3 13.5 3 9.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 9 2.5c0 4-4 7.5-9 11.5z",
   },
   {
     titulo: "Origen local",
-    texto: "Productores del llano de Portuguesa.",
+    texto: "Cosechado y procesado con altos estándares industriales directamente desde el Estado Portuguesa, garantizando frescura y pureza desde la raíz hasta el empaque.",
     d: "M12 2C8.7 2 6 4.7 6 8c0 4.5 6 14 6 14s6-9.5 6-14c0-3.3-2.7-6-6-6zm0 8.5A2.5 2.5 0 1 1 12 5.5a2.5 2.5 0 0 1 0 5z",
   },
 ];
