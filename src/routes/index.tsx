@@ -3,6 +3,7 @@ import { Hero } from "@/components/esperanza/Hero";
 import { Calidad } from "@/components/esperanza/Calidad";
 import { Productos } from "@/components/esperanza/Productos";
 import { Ventajas } from "@/components/esperanza/Ventajas";
+import { ProgramaDistribuidores } from "@/components/esperanza/ProgramaDistribuidores";
 import { RecetarioCTA } from "@/components/esperanza/RecetarioCTA";
 import { Nosotros } from "@/components/esperanza/Nosotros";
 import { Frase } from "@/components/esperanza/Frase";
@@ -42,6 +43,7 @@ function Inicio() {
       <Calidad />
       <Productos />
       <Ventajas />
+      <ProgramaDistribuidores />
       <RecetarioCTA />
       <Nosotros />
       <Frase />
