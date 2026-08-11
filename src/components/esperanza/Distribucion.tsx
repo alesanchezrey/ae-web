@@ -20,10 +20,10 @@ export function Distribucion() {
   const srcActivo = `https://player.vimeo.com/video/${VIMEO_ID}?autoplay=1&loop=1&muted=0&background=0&controls=1&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479`;
 
   return (
-    <section className="textura-papel bg-white pt-24 md:pt-32">
+    <section className="textura-papel bg-white">
       <div
         ref={video.ref}
-        className="mt-16"
+        className=""
         style={{
           clipPath: video.visible ? "inset(0 0 0 0)" : "inset(0 0 100% 0)",
           transform: video.visible ? "scale(1)" : "scale(1.04)",
