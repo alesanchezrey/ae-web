@@ -1,4 +1,5 @@
 import { useRevelar } from "@/hooks/useProgresoScroll";
+import { Check } from "lucide-react";
 import { DistribuidorForm } from "./DistribuidorForm";
 
 const beneficios = [
