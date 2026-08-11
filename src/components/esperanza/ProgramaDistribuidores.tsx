@@ -1,4 +1,5 @@
 import { useRevelar } from "@/hooks/useProgresoScroll";
+import { Check } from "lucide-react";
 import { DistribuidorForm } from "./DistribuidorForm";
 
 const beneficios = [
@@ -34,7 +35,9 @@ export function ProgramaDistribuidores() {
                   className="flex items-start gap-4 text-lg leading-relaxed text-tinta-suave"
                   style={rev(100 + i * 80)}
                 >
-                  <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-esperanza" />
+                  <span className="mt-1.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-esperanza/10 text-esperanza">
+                    <Check size={12} strokeWidth={3} />
+                  </span>
                   <span>{b}</span>
                 </li>
               ))}
