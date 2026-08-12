@@ -170,7 +170,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
       </Campo>
       <div className="sm:col-span-2">
         {errorEnvio && (
-          <p role="alert" className="mb-4 text-sm text-esperanza">
+          <p role="alert" className={`mb-4 text-sm ${errorColor}`}>
             {errorEnvio}
           </p>
         )}
@@ -178,7 +178,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
           type="submit"
           disabled={enviando}
           aria-busy={enviando}
-          className="btn btn-esperanza w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+          className={`btn w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto ${isRed ? "border-white bg-white text-esperanza hover:bg-white/90" : "btn-esperanza"}`}
         >
           {enviando ? (
             <span className="inline-flex items-center gap-2">
@@ -201,18 +201,23 @@ function Campo({
   label,
   error,
   ancho,
+  isRed,
   children,
 }: {
   label: string;
   error?: string | undefined;
   ancho?: boolean | undefined;
+  isRed?: boolean | undefined;
   children: React.ReactNode;
 }) {
   return (
     <label className={`block ${ancho ? "sm:col-span-2" : ""}`}>
-      <span className="dato text-tinta-suave">{label}</span>
+      <span className={`dato ${isRed ? "text-white/80" : "text-tinta-suave"}`}>{label}</span>
       {children}
-      {error && <span className="mt-2 block text-sm text-esperanza">{error}</span>}
+      {error && <span className={`mt-2 block text-sm ${isRed ? "text-white" : "text-esperanza"}`}>{error}</span>}
+    </label>
+  );
+}
     </label>
   );
 }
