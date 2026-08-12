@@ -28,9 +28,11 @@ interface DistribuidorFormProps {
   onSuccess?: () => void;
   successFooter?: React.ReactNode;
   className?: string;
+  variant?: "light" | "red";
 }
 
-export function DistribuidorForm({ onSuccess, successFooter, className = "" }: DistribuidorFormProps) {
+export function DistribuidorForm({ onSuccess, successFooter, className = "", variant = "light" }: DistribuidorFormProps) {
+  const isRed = variant === "red";
   const [valores, setValores] = useState<Campos>(inicial);
   const [errores, setErrores] = useState<Record<string, string>>({});
   const [enviado, setEnviado] = useState(false);
