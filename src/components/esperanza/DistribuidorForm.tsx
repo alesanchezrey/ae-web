@@ -113,7 +113,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
 
   return (
     <form onSubmit={enviar} noValidate className={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${className}`}>
-      <Campo label="Nombre y apellido" error={errores["nombre"]}>
+      <Campo label="Nombre y apellido" error={errores["nombre"]} isRed={isRed}>
         <input
           className={campoClase}
           value={valores.nombre}
@@ -122,7 +122,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
           autoComplete="name"
         />
       </Campo>
-      <Campo label="Empresa (opcional)" error={errores["empresa"]}>
+      <Campo label="Empresa (opcional)" error={errores["empresa"]} isRed={isRed}>
         <input
           className={campoClase}
           value={valores.empresa}
@@ -131,7 +131,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
           autoComplete="organization"
         />
       </Campo>
-      <Campo label="Correo electrónico" error={errores["email"]}>
+      <Campo label="Correo electrónico" error={errores["email"]} isRed={isRed}>
         <input
           type="email"
           className={campoClase}
@@ -141,7 +141,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
           autoComplete="email"
         />
       </Campo>
-      <Campo label="Teléfono" error={errores["telefono"]}>
+      <Campo label="Teléfono" error={errores["telefono"]} isRed={isRed}>
         <input
           type="tel"
           className={campoClase}
@@ -151,7 +151,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
           autoComplete="tel"
         />
       </Campo>
-      <Campo label="Ciudad / estado" error={errores["ciudad"]} ancho>
+      <Campo label="Ciudad / estado" error={errores["ciudad"]} ancho isRed={isRed}>
         <input
           className={campoClase}
           value={valores.ciudad}
@@ -159,7 +159,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
           maxLength={120}
         />
       </Campo>
-      <Campo label="Mensaje (opcional)" error={errores["mensaje"]} ancho>
+      <Campo label="Mensaje (opcional)" error={errores["mensaje"]} ancho isRed={isRed}>
         <textarea
           rows={4}
           className={`${campoClase} resize-none`}
