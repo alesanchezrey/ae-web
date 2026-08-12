@@ -28,9 +28,11 @@ interface DistribuidorFormProps {
   onSuccess?: () => void;
   successFooter?: React.ReactNode;
   className?: string;
+  variant?: "light" | "red";
 }
 
-export function DistribuidorForm({ onSuccess, successFooter, className = "" }: DistribuidorFormProps) {
+export function DistribuidorForm({ onSuccess, successFooter, className = "", variant = "light" }: DistribuidorFormProps) {
+  const isRed = variant === "red";
   const [valores, setValores] = useState<Campos>(inicial);
   const [errores, setErrores] = useState<Record<string, string>>({});
   const [enviado, setEnviado] = useState(false);
@@ -88,17 +90,20 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "" }: D
     }
   };
 
-  const campoClase =
-    "mt-2 w-full rounded-md border border-tinta/20 bg-white px-4 py-3 text-base text-tinta outline-none transition-colors placeholder:text-tinta-suave/60 focus:border-llano";
+  const campoClase = isRed
+    ? "mt-2 w-full rounded-md border border-white/30 bg-white/10 px-4 py-3 text-base text-white outline-none transition-colors placeholder:text-white/60 focus:border-white"
+    : "mt-2 w-full rounded-md border border-tinta/20 bg-white px-4 py-3 text-base text-tinta outline-none transition-colors placeholder:text-tinta-suave/60 focus:border-llano";
+
+  const errorColor = isRed ? "text-white" : "text-esperanza";
 
   if (enviado) {
     return (
       <div className={`py-10 text-center ${className}`}>
-        <p className="antetitulo mb-5 text-esperanza">Solicitud enviada</p>
-        <h3 className="font-display text-3xl leading-tight text-tinta md:text-4xl">
+        <p className={`antetitulo mb-5 ${isRed ? "text-white" : "text-esperanza"}`}>Solicitud enviada</p>
+        <h3 className={`font-display text-3xl leading-tight md:text-4xl ${isRed ? "text-white" : "text-tinta"}`}>
           ¡Gracias por escribirnos!
         </h3>
-        <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-tinta-suave">
+        <p className={`mx-auto mt-6 max-w-md text-lg leading-relaxed ${isRed ? "text-white/80" : "text-tinta-suave"}`}>
           Recibimos tus datos y nuestro equipo comercial se pondrá en contacto contigo muy pronto.
         </p>
         {successFooter}
@@ -108,7 +113,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "" }: D
 
   return (
     <form onSubmit={enviar} noValidate className={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${className}`}>
-      <Campo label="Nombre y apellido" error={errores["nombre"]}>
+      <Campo label="Nombre y apellido" error={errores["nombre"]} isRed={isRed}>
         <input
           className={campoClase}
           value={valores.nombre}
@@ -117,7 +122,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "" }: D
           autoComplete="name"
         />
       </Campo>
-      <Campo label="Empresa (opcional)" error={errores["empresa"]}>
+      <Campo label="Empresa (opcional)" error={errores["empresa"]} isRed={isRed}>
         <input
           className={campoClase}
           value={valores.empresa}
@@ -126,7 +131,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "" }: D
           autoComplete="organization"
         />
       </Campo>
-      <Campo label="Correo electrónico" error={errores["email"]}>
+      <Campo label="Correo electrónico" error={errores["email"]} isRed={isRed}>
         <input
           type="email"
           className={campoClase}
@@ -136,7 +141,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "" }: D
           autoComplete="email"
         />
       </Campo>
-      <Campo label="Teléfono" error={errores["telefono"]}>
+      <Campo label="Teléfono" error={errores["telefono"]} isRed={isRed}>
         <input
           type="tel"
           className={campoClase}
@@ -146,7 +151,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "" }: D
           autoComplete="tel"
         />
       </Campo>
-      <Campo label="Ciudad / estado" error={errores["ciudad"]} ancho>
+      <Campo label="Ciudad / estado" error={errores["ciudad"]} ancho isRed={isRed}>
         <input
           className={campoClase}
           value={valores.ciudad}
@@ -154,7 +159,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "" }: D
           maxLength={120}
         />
       </Campo>
-      <Campo label="Mensaje (opcional)" error={errores["mensaje"]} ancho>
+      <Campo label="Mensaje (opcional)" error={errores["mensaje"]} ancho isRed={isRed}>
         <textarea
           rows={4}
           className={`${campoClase} resize-none`}
@@ -165,7 +170,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "" }: D
       </Campo>
       <div className="sm:col-span-2">
         {errorEnvio && (
-          <p role="alert" className="mb-4 text-sm text-esperanza">
+          <p role="alert" className={`mb-4 text-sm ${errorColor}`}>
             {errorEnvio}
           </p>
         )}
@@ -173,7 +178,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "" }: D
           type="submit"
           disabled={enviando}
           aria-busy={enviando}
-          className="btn btn-esperanza w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+          className={`btn w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto ${isRed ? "border-white bg-white text-esperanza hover:bg-white/90" : "btn-esperanza"}`}
         >
           {enviando ? (
             <span className="inline-flex items-center gap-2">
@@ -196,18 +201,20 @@ function Campo({
   label,
   error,
   ancho,
+  isRed,
   children,
 }: {
   label: string;
   error?: string | undefined;
   ancho?: boolean | undefined;
+  isRed?: boolean | undefined;
   children: React.ReactNode;
 }) {
   return (
     <label className={`block ${ancho ? "sm:col-span-2" : ""}`}>
-      <span className="dato text-tinta-suave">{label}</span>
+      <span className={`dato ${isRed ? "text-white/80" : "text-tinta-suave"}`}>{label}</span>
       {children}
-      {error && <span className="mt-2 block text-sm text-esperanza">{error}</span>}
+      {error && <span className={`mt-2 block text-sm ${isRed ? "text-white" : "text-esperanza"}`}>{error}</span>}
     </label>
   );
 }
