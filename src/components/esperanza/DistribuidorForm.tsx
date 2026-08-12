@@ -218,6 +218,3 @@ function Campo({
     </label>
   );
 }
-    </label>
-  );
-}
