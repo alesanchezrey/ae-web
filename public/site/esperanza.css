@@ -5,4 +5,4 @@
 
 :root{--font-fraunces:"Fraunces","Fraunces Fallback";--font-public-sans:"Public Sans","Public Sans Fallback";--font-space-mono:"Space Mono","Space Mono Fallback"}
 html{font-family:var(--font-sans)}
-.bg-esperanza{background:var(--color-esperanza)}.bg-esperanza\\/10{background-color:color-mix(in oklab, var(--color-esperanza) 10%, transparent)}
+.bg-esperanza{background:var(--color-esperanza)}.bg-esperanza\/10{background-color:color-mix(in oklab, var(--color-esperanza) 10%, transparent)}
