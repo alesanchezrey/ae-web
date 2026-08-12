@@ -55,7 +55,7 @@ export function ProgramaDistribuidores() {
               Sé distribuidor oficial
             </h3>
             <p className="mt-3 max-w-lg text-base leading-relaxed text-tinta-suave">
-              Cuéntanos sobre tu negocio y nos pondremos en contacto contigo.
+              Establece contacto con nuestro equipo de expertos.
             </p>
             <DistribuidorForm className="mt-8" />
           </div>
