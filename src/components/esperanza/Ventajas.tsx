@@ -8,7 +8,7 @@ const ventajas = [
   },
   {
     titulo: "Calidad certificada",
-    texto: "Alimentos confiables nutritivos y accesibles con los mejores estándares en controles de calidad, honrando el esfuerzo del campo y respaldando la confianza de nuestros consumidores",
+    texto: "Alimentos confiables nutritivos y accesibles, honrando el esfuerzo del campo y respaldando la confianza de nuestros consumidores",
     d: "M12 2l8 3v7c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5l8-3zm-1 13l6-6-1.5-1.5L11 12l-2.5-2.5L7 11l4 4z",
   },
   {
