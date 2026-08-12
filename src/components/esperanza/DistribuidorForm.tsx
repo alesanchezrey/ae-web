@@ -90,17 +90,20 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
     }
   };
 
-  const campoClase =
-    "mt-2 w-full rounded-md border border-tinta/20 bg-white px-4 py-3 text-base text-tinta outline-none transition-colors placeholder:text-tinta-suave/60 focus:border-llano";
+  const campoClase = isRed
+    ? "mt-2 w-full rounded-md border border-white/30 bg-white/10 px-4 py-3 text-base text-white outline-none transition-colors placeholder:text-white/60 focus:border-white"
+    : "mt-2 w-full rounded-md border border-tinta/20 bg-white px-4 py-3 text-base text-tinta outline-none transition-colors placeholder:text-tinta-suave/60 focus:border-llano";
+
+  const errorColor = isRed ? "text-white" : "text-esperanza";
 
   if (enviado) {
     return (
       <div className={`py-10 text-center ${className}`}>
-        <p className="antetitulo mb-5 text-esperanza">Solicitud enviada</p>
-        <h3 className="font-display text-3xl leading-tight text-tinta md:text-4xl">
+        <p className={`antetitulo mb-5 ${isRed ? "text-white" : "text-esperanza"}`}>Solicitud enviada</p>
+        <h3 className={`font-display text-3xl leading-tight md:text-4xl ${isRed ? "text-white" : "text-tinta"}`}>
           ¡Gracias por escribirnos!
         </h3>
-        <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-tinta-suave">
+        <p className={`mx-auto mt-6 max-w-md text-lg leading-relaxed ${isRed ? "text-white/80" : "text-tinta-suave"}`}>
           Recibimos tus datos y nuestro equipo comercial se pondrá en contacto contigo muy pronto.
         </p>
         {successFooter}
