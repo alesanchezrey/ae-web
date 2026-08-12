@@ -47,17 +47,17 @@ export function ProgramaDistribuidores() {
 
         <div className="md:col-span-7">
           <div
-            className="textura-papel rounded-xl border border-tinta/10 bg-white p-6 shadow-xl md:p-10"
+            className="rounded-xl bg-esperanza p-6 shadow-xl md:p-10"
             style={rev(200)}
           >
-            <p className="antetitulo mb-3 text-esperanza">Solicitud</p>
-            <h3 className="font-display text-2xl leading-tight text-tinta md:text-3xl">
+            <p className="antetitulo mb-3 text-white/80">Solicitud</p>
+            <h3 className="font-display text-2xl leading-tight text-white md:text-3xl">
               Sé distribuidor oficial
             </h3>
-            <p className="mt-3 max-w-lg text-base leading-relaxed text-tinta-suave">
+            <p className="mt-3 max-w-lg text-base leading-relaxed text-white/80">
               Establece contacto con nuestro equipo de expertos.
             </p>
-            <DistribuidorForm className="mt-8" />
+            <DistribuidorForm className="mt-8" variant="red" />
           </div>
         </div>
       </div>
