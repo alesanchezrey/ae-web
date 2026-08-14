@@ -11,11 +11,11 @@
       "composicion": "/productos/comp-harina-maiz-1kg.png",
       "fotos": [
         {
-          "src": "/__l5e/assets-v1/e3d9a8c0-cbe8-4ff1-9141-18654f9d274c/harina-amasando2.webp",
+          "src": "/fotos/harina-amasando2.webp",
           "alt": "Mujer amasando harina de maíz junto al empaque de Harina de Maíz Precocida Esperanza"
         },
         {
-          "src": "/__l5e/assets-v1/8f2cc1c3-8d02-4011-b3cb-12ae4f0b2d37/harina-detalle2.webp",
+          "src": "/fotos/harina-detalle2.webp",
           "alt": "Harina de Maíz Precocida Esperanza cayendo del empaque a un bol de vidrio"
         }
       ],
@@ -92,7 +92,7 @@
           "alt": "Aceite de Soya Refinado Esperanza vertido en un caldero de hierro caliente"
         },
         {
-          "src": "/__l5e/assets-v1/daf84321-914d-49f1-a2a9-338e92eb9fa2/aceite-tostones.webp",
+          "src": "/fotos/aceite-tostones.webp",
           "alt": "Mujer preparando tostones en casa con Aceite de Soya Refinado Esperanza"
         }
       ],

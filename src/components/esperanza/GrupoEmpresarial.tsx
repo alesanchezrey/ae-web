@@ -1,12 +1,9 @@
 import { useRevelar } from "@/hooks/useProgresoScroll";
-import esperanzaLogo from "@/assets/alimentos-esperanza.png.asset.json";
-import vrTradeLogo from "@/assets/vr-trade.png.asset.json";
-import agricolaLogo from "@/assets/agricola-vr.png.asset.json";
 
 const empresas = [
-  { nombre: "Alimentos Esperanza", src: esperanzaLogo.url },
-  { nombre: "VR Trade LLC — Global Food Solutions", src: vrTradeLogo.url },
-  { nombre: "Agrícola VR, C.A.", src: agricolaLogo.url },
+  { nombre: "Alimentos Esperanza", src: "/brand/alimentos-esperanza.png" },
+  { nombre: "VR Trade LLC — Global Food Solutions", src: "/brand/vr-trade.png" },
+  { nombre: "Agrícola VR, C.A.", src: "/brand/agricola-vr.png" },
 ];
 
 export function GrupoEmpresarial() {
