@@ -59,7 +59,7 @@ await writeFile(path.join(dist, ".htaccess"), htaccess, "utf8");
 const data = JSON.parse(await readFile(path.join(root, "src/data/site-data.json"), "utf8"));
 const BASE = "https://alimentosesperanza.com";
 const hoy = new Date().toISOString().slice(0, 10);
-const lanzamientos = new Set(["harina-de-maiz-precocida-1kg", "aceite-de-soya-refinado-1l"]);
+const lanzamientos = new Set(["harina-de-maiz-precocida", "aceite-de-soya-refinado"]);
 
 const paths = [
   { loc: "/", priority: "1.0", changefreq: "weekly" },
