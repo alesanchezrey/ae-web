@@ -9,7 +9,9 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build:static": "vite build --config vite.static.config.ts && node scripts/static-postbuild.mjs",
+    "preview:static": "vite preview --config vite.static.config.ts --outDir dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
