@@ -10,19 +10,37 @@ export function useProgresoScroll(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
-    const tick = () => {
+    let pendiente = false;
+
+    const actualizar = () => {
+      pendiente = false;
       const rect = el.getBoundingClientRect();
       const total = el.offsetHeight - window.innerHeight;
       const p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
-      if (Math.abs(p - progresoRef.current) > 5e-4) {
+      if (!reducirMovimiento && Math.abs(p - progresoRef.current) > 5e-4) {
         progresoRef.current = p;
         setProgreso(p);
       }
-      raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+
+    const programar = () => {
+      if (pendiente) return;
+      pendiente = true;
+      raf = requestAnimationFrame(actualizar);
+    };
+
+    actualizar();
+    if (!reducirMovimiento) {
+      window.addEventListener("scroll", programar, { passive: true });
+      window.addEventListener("resize", programar, { passive: true });
+    }
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", programar);
+      window.removeEventListener("resize", programar);
+    };
   }, [ref]);
 
   return { progreso, progresoRef };
@@ -80,14 +98,30 @@ export function useParallax(ref: RefObject<HTMLElement | null>, factor = 0.12) {
     const el = ref.current;
     if (!el) return;
     let raf = 0;
-    const tick = () => {
+    let pendiente = false;
+
+    const actualizar = () => {
+      pendiente = false;
       const rect = el.getBoundingClientRect();
+      if (rect.bottom < -window.innerHeight || rect.top > window.innerHeight * 2) return;
       const centro = rect.top + rect.height / 2 - window.innerHeight / 2;
       setOffset(-centro * factor);
-      raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+
+    const programar = () => {
+      if (pendiente) return;
+      pendiente = true;
+      raf = requestAnimationFrame(actualizar);
+    };
+
+    actualizar();
+    window.addEventListener("scroll", programar, { passive: true });
+    window.addEventListener("resize", programar, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", programar);
+      window.removeEventListener("resize", programar);
+    };
   }, [ref, factor]);
   return offset;
 }

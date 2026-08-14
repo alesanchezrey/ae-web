@@ -15,15 +15,6 @@ const esquema = z.object({
 
 type Campos = z.infer<typeof esquema>;
 
-const inicial: Campos = {
-  nombre: "",
-  empresa: "",
-  email: "",
-  telefono: "",
-  ciudad: "",
-  mensaje: "",
-};
-
 interface DistribuidorFormProps {
   onSuccess?: () => void;
   successFooter?: React.ReactNode;
@@ -33,19 +24,24 @@ interface DistribuidorFormProps {
 
 export function DistribuidorForm({ onSuccess, successFooter, className = "", variant = "light" }: DistribuidorFormProps) {
   const isRed = variant === "red";
-  const [valores, setValores] = useState<Campos>(inicial);
   const [errores, setErrores] = useState<Record<string, string>>({});
   const [enviado, setEnviado] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [errorEnvio, setErrorEnvio] = useState<string | null>(null);
 
-  const set = (campo: keyof Campos) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setValores((v) => ({ ...v, [campo]: e.target.value }));
-  };
-
   const enviar = async (e: React.FormEvent) => {
     e.preventDefault();
     if (enviando) return;
+    const formulario = e.currentTarget as HTMLFormElement;
+    const datosFormulario = new FormData(formulario);
+    const valores: Campos = {
+      nombre: String(datosFormulario.get("nombre") ?? ""),
+      empresa: String(datosFormulario.get("empresa") ?? ""),
+      email: String(datosFormulario.get("email") ?? ""),
+      telefono: String(datosFormulario.get("telefono") ?? ""),
+      ciudad: String(datosFormulario.get("ciudad") ?? ""),
+      mensaje: String(datosFormulario.get("mensaje") ?? ""),
+    };
     const r = esquema.safeParse(valores);
     if (!r.success) {
       const errs: Record<string, string> = {};
@@ -77,7 +73,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
         throw new Error(datos?.message ?? "No pudimos enviar tu solicitud.");
       }
       setEnviado(true);
-      setValores(inicial);
+      formulario.reset();
       onSuccess?.();
     } catch (err) {
       setErrorEnvio(
@@ -115,56 +111,50 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
     <form onSubmit={enviar} noValidate className={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${className}`}>
       <Campo label="Nombre y apellido" error={errores["nombre"]} isRed={isRed}>
         <input
+          name="nombre"
           className={campoClase}
-          value={valores.nombre}
-          onChange={set("nombre")}
           maxLength={100}
           autoComplete="name"
         />
       </Campo>
       <Campo label="Empresa (opcional)" error={errores["empresa"]} isRed={isRed}>
         <input
+          name="empresa"
           className={campoClase}
-          value={valores.empresa}
-          onChange={set("empresa")}
           maxLength={120}
           autoComplete="organization"
         />
       </Campo>
       <Campo label="Correo electrónico" error={errores["email"]} isRed={isRed}>
         <input
+          name="email"
           type="email"
           className={campoClase}
-          value={valores.email}
-          onChange={set("email")}
           maxLength={255}
           autoComplete="email"
         />
       </Campo>
       <Campo label="Teléfono" error={errores["telefono"]} isRed={isRed}>
         <input
+          name="telefono"
           type="tel"
           className={campoClase}
-          value={valores.telefono}
-          onChange={set("telefono")}
           maxLength={30}
           autoComplete="tel"
         />
       </Campo>
       <Campo label="Ciudad / estado" error={errores["ciudad"]} ancho isRed={isRed}>
         <input
+          name="ciudad"
           className={campoClase}
-          value={valores.ciudad}
-          onChange={set("ciudad")}
           maxLength={120}
         />
       </Campo>
       <Campo label="Mensaje (opcional)" error={errores["mensaje"]} ancho isRed={isRed}>
         <textarea
+          name="mensaje"
           rows={4}
           className={`${campoClase} resize-none`}
-          value={valores.mensaje}
-          onChange={set("mensaje")}
           maxLength={1000}
         />
       </Campo>
