@@ -72,6 +72,7 @@ export function SecuenciaFrames({
     if (!canvas) return;
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
+    const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
     let pendiente = false;
 
@@ -127,7 +128,9 @@ export function SecuenciaFrames({
 
     redimensionar();
     programarDibujo();
-    window.addEventListener("scroll", programarDibujo, { passive: true });
+    if (!reducirMovimiento) {
+      window.addEventListener("scroll", programarDibujo, { passive: true });
+    }
     window.addEventListener("resize", redimensionarYDibujar, { passive: true });
     return () => {
       cancelAnimationFrame(raf);

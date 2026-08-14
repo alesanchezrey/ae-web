@@ -10,6 +10,7 @@ export function useProgresoScroll(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
     let pendiente = false;
 
@@ -18,7 +19,7 @@ export function useProgresoScroll(ref: RefObject<HTMLElement | null>) {
       const rect = el.getBoundingClientRect();
       const total = el.offsetHeight - window.innerHeight;
       const p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
-      if (Math.abs(p - progresoRef.current) > 5e-4) {
+      if (!reducirMovimiento && Math.abs(p - progresoRef.current) > 5e-4) {
         progresoRef.current = p;
         setProgreso(p);
       }
@@ -31,8 +32,10 @@ export function useProgresoScroll(ref: RefObject<HTMLElement | null>) {
     };
 
     actualizar();
-    window.addEventListener("scroll", programar, { passive: true });
-    window.addEventListener("resize", programar, { passive: true });
+    if (!reducirMovimiento) {
+      window.addEventListener("scroll", programar, { passive: true });
+      window.addEventListener("resize", programar, { passive: true });
+    }
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", programar);
