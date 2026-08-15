@@ -141,4 +141,15 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
+
+  /* Keep focus and typing from recalculating the complete, image-heavy home page. */
+  main > section:not(#inicio) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+
+  form,
+  [role="dialog"] {
+    content-visibility: visible;
+  }
 }

@@ -11,11 +11,8 @@ export function useProgresoScroll(ref: RefObject<HTMLElement | null>) {
     const el = ref.current;
     if (!el) return;
     const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let raf = 0;
-    let pendiente = false;
 
     const actualizar = () => {
-      pendiente = false;
       const rect = el.getBoundingClientRect();
       const total = el.offsetHeight - window.innerHeight;
       const p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
@@ -25,21 +22,14 @@ export function useProgresoScroll(ref: RefObject<HTMLElement | null>) {
       }
     };
 
-    const programar = () => {
-      if (pendiente) return;
-      pendiente = true;
-      raf = requestAnimationFrame(actualizar);
-    };
-
     actualizar();
     if (!reducirMovimiento) {
-      window.addEventListener("scroll", programar, { passive: true });
-      window.addEventListener("resize", programar, { passive: true });
+      window.addEventListener("scroll", actualizar, { passive: true });
+      window.addEventListener("resize", actualizar, { passive: true });
     }
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", programar);
-      window.removeEventListener("resize", programar);
+      window.removeEventListener("scroll", actualizar);
+      window.removeEventListener("resize", actualizar);
     };
   }, [ref]);
 
@@ -57,14 +47,6 @@ export function useRevelar<T extends HTMLElement>(threshold = 0.2) {
       setVisible(true);
       return;
     }
-    const enPantalla = () => {
-      const r = el.getBoundingClientRect();
-      return r.top < window.innerHeight * (1 - threshold * 0.5) && r.bottom > 0;
-    };
-    if (enPantalla()) {
-      setVisible(true);
-      return;
-    }
     const obs = new IntersectionObserver(
       (entries) => {
         if (entries[0]?.isIntersecting) {
@@ -75,17 +57,8 @@ export function useRevelar<T extends HTMLElement>(threshold = 0.2) {
       { threshold, rootMargin: "0px 0px -8% 0px" },
     );
     obs.observe(el);
-    const alScroll = () => {
-      if (enPantalla()) {
-        setVisible(true);
-        obs.disconnect();
-        window.removeEventListener("scroll", alScroll);
-      }
-    };
-    window.addEventListener("scroll", alScroll, { passive: true });
     return () => {
       obs.disconnect();
-      window.removeEventListener("scroll", alScroll);
     };
   }, [threshold]);
 
@@ -97,30 +70,25 @@ export function useParallax(ref: RefObject<HTMLElement | null>, factor = 0.12) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    let raf = 0;
-    let pendiente = false;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setOffset(0);
+      return;
+    }
 
     const actualizar = () => {
-      pendiente = false;
       const rect = el.getBoundingClientRect();
       if (rect.bottom < -window.innerHeight || rect.top > window.innerHeight * 2) return;
       const centro = rect.top + rect.height / 2 - window.innerHeight / 2;
       setOffset(-centro * factor);
     };
 
-    const programar = () => {
-      if (pendiente) return;
-      pendiente = true;
-      raf = requestAnimationFrame(actualizar);
-    };
-
     actualizar();
-    window.addEventListener("scroll", programar, { passive: true });
-    window.addEventListener("resize", programar, { passive: true });
+    window.addEventListener("scroll", actualizar, { passive: true });
+    window.addEventListener("resize", actualizar, { passive: true });
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", programar);
-      window.removeEventListener("resize", programar);
+      window.removeEventListener("scroll", actualizar);
+      window.removeEventListener("resize", actualizar);
     };
   }, [ref, factor]);
   return offset;
