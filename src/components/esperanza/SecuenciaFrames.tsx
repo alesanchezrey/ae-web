@@ -51,19 +51,25 @@ export function SecuenciaFrames({
       }
     }
 
+    let temporizador: ReturnType<typeof setTimeout> | undefined;
+    const cargarEnReposo = (i: number) => {
+      temporizador = setTimeout(() => {
+        if (cancelado || i >= orden.length) return;
+        void cargar(orden[i] ?? 0).then(() => cargarEnReposo(i + 1));
+      }, 16);
+    };
+
     void (async () => {
       const primeros = orden.slice(0, Math.ceil(n / 8));
       await Promise.all(primeros.map(cargar));
       if (cancelado) return;
       setListo(true);
-      for (const i of orden.slice(primeros.length)) {
-        if (cancelado) return;
-        await cargar(i);
-      }
+      cargarEnReposo(primeros.length);
     })();
 
     return () => {
       cancelado = true;
+      if (temporizador) clearTimeout(temporizador);
     };
   }, [base, totalEscritorio, totalMovil]);
 
