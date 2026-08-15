@@ -44,7 +44,7 @@ export function FormularioDistribuidor() {
         aria-modal="true"
         aria-label="Formulario para distribuidores"
         onClick={(e) => e.stopPropagation()}
-        className="textura-papel relative w-full max-w-2xl rounded-xl bg-white p-7 shadow-2xl md:p-10"
+        className="relative w-full max-w-2xl rounded-xl bg-white p-7 shadow-2xl md:p-10"
       >
         <button
           type="button"

@@ -19,7 +19,7 @@ export function ProgramaDistribuidores() {
   });
 
   return (
-    <section ref={ref} className="textura-papel bg-white py-28 md:py-36">
+    <section ref={ref} className="bg-white py-28 md:py-36">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 md:grid-cols-12 md:gap-16 md:px-12">
         <div className="md:col-span-5">
           <div style={rev(0)}>
