@@ -160,7 +160,8 @@ export function SecuenciaFrames({
 
     const redimensionarYDibujar = () => {
       // El teclado virtual dispara resize por alto; ignoramos esos casos.
-      if (window.innerWidth === anchoPrevio && escribiendo()) return;
+      if (escribiendo()) return;
+      if (window.innerWidth === anchoPrevio) return;
       anchoPrevio = window.innerWidth;
       redimensionar();
       programarDibujo();

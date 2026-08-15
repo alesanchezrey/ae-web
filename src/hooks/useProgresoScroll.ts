@@ -77,15 +77,24 @@ export function useRevelar<T extends HTMLElement>(threshold = 0.2) {
       { threshold, rootMargin: "0px 0px -8% 0px" },
     );
     obs.observe(el);
+    let raf = 0;
+    let pendiente = false;
     const alScroll = () => {
-      if (enPantalla()) {
-        setVisible(true);
-        obs.disconnect();
-        window.removeEventListener("scroll", alScroll);
-      }
+      if (pendiente) return;
+      pendiente = true;
+      raf = requestAnimationFrame(() => {
+        pendiente = false;
+        if (escribiendo()) return;
+        if (enPantalla()) {
+          setVisible(true);
+          obs.disconnect();
+          window.removeEventListener("scroll", alScroll);
+        }
+      });
     };
     window.addEventListener("scroll", alScroll, { passive: true });
     return () => {
+      cancelAnimationFrame(raf);
       obs.disconnect();
       window.removeEventListener("scroll", alScroll);
     };
