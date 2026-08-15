@@ -37,7 +37,8 @@ export function SecuenciaFrames({
         const img = new Image();
         img.decoding = "async";
         img.onload = img.onerror = () => {
-          if (!cancelado) imagenes.current[i] = img;
+          const actual = Math.round((progresoRef.current ?? 0) * (n - 1));
+          if (!cancelado && Math.abs(i - actual) <= 6) imagenes.current[i] = img;
           resolve();
         };
         const ruta = `${base}/${movil ? "mobile" : "desktop"}/f${String(i + 1).padStart(3, "0")}.webp`;
@@ -126,7 +127,7 @@ export function SecuenciaFrames({
           // campos en equipos con memoria limitada. Conservamos una ventana
           // alrededor del fotograma actual; las URLs siguen en caché HTTP.
           for (let j = 0; j < imagenes.current.length; j++) {
-            if (Math.abs(j - solicitado) > 12) imagenes.current[j] = null;
+            if (Math.abs(j - solicitado) > 6) imagenes.current[j] = null;
           }
         }
       }
