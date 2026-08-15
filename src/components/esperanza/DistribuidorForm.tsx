@@ -92,6 +92,14 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
 
   const errorColor = isRed ? "text-white" : "text-esperanza";
 
+  const pausarPagina = () => document.body.classList.add("formulario-activo");
+  const reanudarPagina = (e: React.FocusEvent<HTMLFormElement>) => {
+    const siguiente = e.relatedTarget;
+    if (!(siguiente instanceof Node) || !e.currentTarget.contains(siguiente)) {
+      document.body.classList.remove("formulario-activo");
+    }
+  };
+
   if (enviado) {
     return (
       <div className={`py-10 text-center ${className}`}>
@@ -108,7 +116,13 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
   }
 
   return (
-    <form onSubmit={enviar} noValidate className={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${className}`}>
+    <form
+      onSubmit={enviar}
+      onFocusCapture={pausarPagina}
+      onBlurCapture={reanudarPagina}
+      noValidate
+      className={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${className}`}
+    >
       <Campo label="Nombre y apellido" error={errores["nombre"]} isRed={isRed}>
         <input
           name="nombre"

@@ -142,3 +142,8 @@
     color: var(--color-foreground);
   }
 }
+
+/* Evita que Chromium repinte toda la portada mientras edita un formulario. */
+body.formulario-activo main > section:not(:focus-within) {
+  visibility: hidden;
+}
