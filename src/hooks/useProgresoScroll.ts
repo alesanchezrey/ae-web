@@ -71,6 +71,11 @@ export function useParallax(ref: RefObject<HTMLElement | null>, factor = 0.12) {
     const el = ref.current;
     if (!el) return;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setOffset(0);
+      return;
+    }
+
     const actualizar = () => {
       const rect = el.getBoundingClientRect();
       if (rect.bottom < -window.innerHeight || rect.top > window.innerHeight * 2) return;

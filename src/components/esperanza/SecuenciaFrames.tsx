@@ -78,7 +78,6 @@ export function SecuenciaFrames({
     if (!canvas) return;
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
-    const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const redimensionar = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -125,12 +124,8 @@ export function SecuenciaFrames({
 
     redimensionar();
     dibujar();
-    if (!reducirMovimiento) {
-      window.addEventListener("scroll", dibujar, { passive: true });
-    }
     window.addEventListener("resize", redimensionarYDibujar, { passive: true });
     return () => {
-      window.removeEventListener("scroll", dibujar);
       window.removeEventListener("resize", redimensionarYDibujar);
     };
   }, [progresoRef, listo]);
