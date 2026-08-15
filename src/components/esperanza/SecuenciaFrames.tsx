@@ -28,7 +28,10 @@ export function SecuenciaFrames({
     const n = movil ? totalMovil : totalEscritorio;
     total.current = n;
     imagenes.current = Array(n).fill(null);
-    urls.current = Array(n).fill(null);
+    urls.current = Array.from(
+      { length: n },
+      (_, i) => `${base}/${movil ? "mobile" : "desktop"}/f${String(i + 1).padStart(3, "0")}.webp`,
+    );
     ultimo.current = -1;
     let cancelado = false;
 
@@ -41,31 +44,20 @@ export function SecuenciaFrames({
           if (!cancelado && Math.abs(i - actual) <= 6) imagenes.current[i] = img;
           resolve();
         };
-        const ruta = `${base}/${movil ? "mobile" : "desktop"}/f${String(i + 1).padStart(3, "0")}.webp`;
-        urls.current[i] = ruta;
+        const ruta = urls.current[i];
+        if (!ruta) {
+          resolve();
+          return;
+        }
         img.src = ruta;
       });
 
-    const orden: number[] = [];
-    const vistos = new Set<number>();
-    for (const paso of [8, 4, 2, 1]) {
-      for (let i = 0; i < n; i += paso) {
-        if (!vistos.has(i)) {
-          vistos.add(i);
-          orden.push(i);
-        }
-      }
-    }
+    const claves = Array.from({ length: Math.ceil(n / 8) }, (_, i) => Math.min(i * 8, n - 1));
 
     void (async () => {
-      const primeros = orden.slice(0, Math.ceil(n / 8));
-      await Promise.all(primeros.map(cargar));
+      await Promise.all(claves.map(cargar));
       if (cancelado) return;
       setListo(true);
-      for (const i of orden.slice(primeros.length)) {
-        if (cancelado) return;
-        await cargar(i);
-      }
     })();
 
     return () => {
