@@ -18,6 +18,7 @@ export function SecuenciaFrames({
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imagenes = useRef<(HTMLImageElement | null)[]>([]);
+  const urls = useRef<(string | null)[]>([]);
   const ultimo = useRef(-1);
   const total = useRef(totalEscritorio);
   const [listo, setListo] = useState(false);
@@ -27,6 +28,7 @@ export function SecuenciaFrames({
     const n = movil ? totalMovil : totalEscritorio;
     total.current = n;
     imagenes.current = Array(n).fill(null);
+    urls.current = Array(n).fill(null);
     ultimo.current = -1;
     let cancelado = false;
 
@@ -38,7 +40,9 @@ export function SecuenciaFrames({
           if (!cancelado) imagenes.current[i] = img;
           resolve();
         };
-        img.src = `${base}/${movil ? "mobile" : "desktop"}/f${String(i + 1).padStart(3, "0")}.webp`;
+        const ruta = `${base}/${movil ? "mobile" : "desktop"}/f${String(i + 1).padStart(3, "0")}.webp`;
+        urls.current[i] = ruta;
+        img.src = ruta;
       });
 
     const orden: number[] = [];
@@ -65,6 +69,8 @@ export function SecuenciaFrames({
 
     return () => {
       cancelado = true;
+      imagenes.current = [];
+      urls.current = [];
     };
   }, [base, totalEscritorio, totalMovil]);
 
@@ -76,6 +82,7 @@ export function SecuenciaFrames({
     const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
     let pendiente = false;
+    let cargando = -1;
 
     let anchoPrevio = window.innerWidth;
     const redimensionar = () => {
@@ -100,9 +107,8 @@ export function SecuenciaFrames({
       pendiente = false;
       if (escribiendo()) return;
       const n = total.current;
-      const idx = masCercano(
-        Math.min(n - 1, Math.round((progresoRef.current ?? 0) * (n - 1))),
-      );
+      const solicitado = Math.min(n - 1, Math.round((progresoRef.current ?? 0) * (n - 1)));
+      const idx = masCercano(solicitado);
       if (idx !== -1 && idx !== ultimo.current) {
         const img = imagenes.current[idx];
         if (img?.naturalWidth) {
@@ -114,6 +120,33 @@ export function SecuenciaFrames({
           const h = img.naturalHeight * escala;
           ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
           ultimo.current = idx;
+
+          // El navegador conserva cada WebP decodificado en memoria. Mantener los
+          // 96 fotogramas vivos consume cientos de MB y bloquea la edición de
+          // campos en equipos con memoria limitada. Conservamos una ventana
+          // alrededor del fotograma actual; las URLs siguen en caché HTTP.
+          for (let j = 0; j < imagenes.current.length; j++) {
+            if (Math.abs(j - solicitado) > 12) imagenes.current[j] = null;
+          }
+        }
+      }
+
+      if (!imagenes.current[solicitado] && cargando !== solicitado) {
+        const ruta = urls.current[solicitado];
+        if (ruta) {
+          cargando = solicitado;
+          const img = new Image();
+          img.decoding = "async";
+          img.onload = () => {
+            imagenes.current[solicitado] = img;
+            cargando = -1;
+            ultimo.current = -1;
+            programarDibujo();
+          };
+          img.onerror = () => {
+            cargando = -1;
+          };
+          img.src = ruta;
         }
       }
     };
