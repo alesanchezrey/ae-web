@@ -51,25 +51,19 @@ export function SecuenciaFrames({
       }
     }
 
-    let temporizador: ReturnType<typeof setTimeout> | undefined;
-    const cargarEnReposo = (i: number) => {
-      temporizador = setTimeout(() => {
-        if (cancelado || i >= orden.length) return;
-        void cargar(orden[i] ?? 0).then(() => cargarEnReposo(i + 1));
-      }, 16);
-    };
-
     void (async () => {
       const primeros = orden.slice(0, Math.ceil(n / 8));
       await Promise.all(primeros.map(cargar));
       if (cancelado) return;
       setListo(true);
-      cargarEnReposo(primeros.length);
+      for (const i of orden.slice(primeros.length)) {
+        if (cancelado) return;
+        await cargar(i);
+      }
     })();
 
     return () => {
       cancelado = true;
-      if (temporizador) clearTimeout(temporizador);
     };
   }, [base, totalEscritorio, totalMovil]);
 
@@ -78,6 +72,9 @@ export function SecuenciaFrames({
     if (!canvas) return;
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
+    const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let raf = 0;
+    let pendiente = false;
 
     const redimensionar = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -98,6 +95,7 @@ export function SecuenciaFrames({
     };
 
     const dibujar = () => {
+      pendiente = false;
       const n = total.current;
       const idx = masCercano(
         Math.min(n - 1, Math.round((progresoRef.current ?? 0) * (n - 1))),
@@ -117,15 +115,26 @@ export function SecuenciaFrames({
       }
     };
 
+    const programarDibujo = () => {
+      if (pendiente) return;
+      pendiente = true;
+      raf = requestAnimationFrame(dibujar);
+    };
+
     const redimensionarYDibujar = () => {
       redimensionar();
-      dibujar();
+      programarDibujo();
     };
 
     redimensionar();
-    dibujar();
+    programarDibujo();
+    if (!reducirMovimiento) {
+      window.addEventListener("scroll", programarDibujo, { passive: true });
+    }
     window.addEventListener("resize", redimensionarYDibujar, { passive: true });
     return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", programarDibujo);
       window.removeEventListener("resize", redimensionarYDibujar);
     };
   }, [progresoRef, listo]);

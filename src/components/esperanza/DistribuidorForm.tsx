@@ -111,49 +111,43 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
     <form onSubmit={enviar} noValidate className={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${className}`}>
       <Campo label="Nombre y apellido" error={errores["nombre"]} isRed={isRed}>
         <input
-          type="text"
           name="nombre"
           className={campoClase}
           maxLength={100}
-          autoComplete="off"
+          autoComplete="name"
         />
       </Campo>
       <Campo label="Empresa (opcional)" error={errores["empresa"]} isRed={isRed}>
         <input
-          type="text"
           name="empresa"
           className={campoClase}
           maxLength={120}
-          autoComplete="off"
+          autoComplete="organization"
         />
       </Campo>
       <Campo label="Correo electrónico" error={errores["email"]} isRed={isRed}>
         <input
           name="email"
-          type="text"
+          type="email"
           className={campoClase}
           maxLength={255}
-          autoComplete="off"
-          inputMode="email"
+          autoComplete="email"
         />
       </Campo>
       <Campo label="Teléfono" error={errores["telefono"]} isRed={isRed}>
         <input
           name="telefono"
-          type="text"
+          type="tel"
           className={campoClase}
           maxLength={30}
-          autoComplete="off"
-          inputMode="tel"
+          autoComplete="tel"
         />
       </Campo>
       <Campo label="Ciudad / estado" error={errores["ciudad"]} ancho isRed={isRed}>
         <input
-          type="text"
           name="ciudad"
           className={campoClase}
           maxLength={120}
-          autoComplete="off"
         />
       </Campo>
       <Campo label="Mensaje (opcional)" error={errores["mensaje"]} ancho isRed={isRed}>
@@ -162,7 +156,6 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
           rows={4}
           className={`${campoClase} resize-none`}
           maxLength={1000}
-          autoComplete="off"
         />
       </Campo>
       <div className="sm:col-span-2">

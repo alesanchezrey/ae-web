@@ -19,10 +19,7 @@ export function Header() {
 
   useEffect(() => {
     if (!esInicio) return;
-    const onScroll = () => {
-      if (document.activeElement?.matches("input, textarea")) return;
-      setBajado(window.scrollY > 0.85 * window.innerHeight);
-    };
+    const onScroll = () => setBajado(window.scrollY > 0.85 * window.innerHeight);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
