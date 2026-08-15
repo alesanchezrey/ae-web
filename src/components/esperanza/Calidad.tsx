@@ -91,7 +91,7 @@ export function Calidad() {
             <p className="font-display text-[clamp(2rem,3.6vw,3.8rem)] leading-[1.08] tracking-[-0.015em] text-tinta">
               Nuestros productos cumplen con los{" "}
               <span className="text-llano">más altos estándares de calidad</span> en
-              Venezuela
+              Venezuela.
             </p>
             <div className="surco mt-8 max-w-xs" />
           </div>
