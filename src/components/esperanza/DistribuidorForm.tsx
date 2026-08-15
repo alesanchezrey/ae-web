@@ -118,6 +118,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
   return (
     <form
       onSubmit={enviar}
+      onPointerDownCapture={pausarPagina}
       onFocusCapture={pausarPagina}
       onBlurCapture={reanudarPagina}
       noValidate

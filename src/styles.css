@@ -144,6 +144,6 @@
 }
 
 /* Evita que Chromium repinte toda la portada mientras edita un formulario. */
-body.formulario-activo main > section:not(:focus-within) {
+body.formulario-activo main > section:not(.formulario-seccion) {
   visibility: hidden;
 }
