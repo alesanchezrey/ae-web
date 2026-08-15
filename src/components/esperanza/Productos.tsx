@@ -66,6 +66,7 @@ export function Productos() {
               key={p.slug}
               onMouseEnter={() => setActivo(i)}
               onMouseLeave={() => setActivo((v) => (v === i ? null : v))}
+              onFocus={() => setActivo(i)}
               onClick={() => setActivo(i)}
               className={`group relative w-[85vw] shrink-0 snap-center overflow-visible rounded-lg border bg-white transition-[transform,border-color] duration-500 ease-asiento sm:w-[46vw] lg:w-[24rem] ${
                 act ? "z-20 -translate-y-2 border-trigo" : "z-10 border-tinta/12"
