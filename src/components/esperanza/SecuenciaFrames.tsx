@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
+import { escribiendo } from "@/lib/pausa-scroll";
 
 type Props = {
   base: string;
@@ -76,6 +77,7 @@ export function SecuenciaFrames({
     let raf = 0;
     let pendiente = false;
 
+    let anchoPrevio = window.innerWidth;
     const redimensionar = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const { width, height } = canvas.getBoundingClientRect();
@@ -96,6 +98,7 @@ export function SecuenciaFrames({
 
     const dibujar = () => {
       pendiente = false;
+      if (escribiendo()) return;
       const n = total.current;
       const idx = masCercano(
         Math.min(n - 1, Math.round((progresoRef.current ?? 0) * (n - 1))),
@@ -122,6 +125,9 @@ export function SecuenciaFrames({
     };
 
     const redimensionarYDibujar = () => {
+      // El teclado virtual dispara resize por alto; ignoramos esos casos.
+      if (window.innerWidth === anchoPrevio && escribiendo()) return;
+      anchoPrevio = window.innerWidth;
       redimensionar();
       programarDibujo();
     };

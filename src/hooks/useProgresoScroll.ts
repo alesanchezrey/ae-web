@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
+import { escribiendo } from "@/lib/pausa-scroll";
 
 export const tramo = (v: number, a: number, b: number) =>
   Math.min(1, Math.max(0, (v - a) / (b - a)));
@@ -16,6 +17,7 @@ export function useProgresoScroll(ref: RefObject<HTMLElement | null>) {
 
     const actualizar = () => {
       pendiente = false;
+      if (escribiendo()) return;
       const rect = el.getBoundingClientRect();
       const total = el.offsetHeight - window.innerHeight;
       const p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
@@ -102,6 +104,7 @@ export function useParallax(ref: RefObject<HTMLElement | null>, factor = 0.12) {
 
     const actualizar = () => {
       pendiente = false;
+      if (escribiendo()) return;
       const rect = el.getBoundingClientRect();
       if (rect.bottom < -window.innerHeight || rect.top > window.innerHeight * 2) return;
       const centro = rect.top + rect.height / 2 - window.innerHeight / 2;
