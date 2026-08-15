@@ -19,23 +19,10 @@ export function Header() {
 
   useEffect(() => {
     if (!esInicio) return;
-    let raf = 0;
-    let pendiente = false;
-    const actualizar = () => {
-      pendiente = false;
-      setBajado(window.scrollY > 0.85 * window.innerHeight);
-    };
-    const onScroll = () => {
-      if (pendiente) return;
-      pendiente = true;
-      raf = requestAnimationFrame(actualizar);
-    };
+    const onScroll = () => setBajado(window.scrollY > 0.85 * window.innerHeight);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, [esInicio]);
 
   useEffect(() => {

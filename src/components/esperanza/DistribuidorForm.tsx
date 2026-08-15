@@ -108,11 +108,7 @@ export function DistribuidorForm({ onSuccess, successFooter, className = "", var
   }
 
   return (
-    <form
-      onSubmit={enviar}
-      noValidate
-      className={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${className}`}
-    >
+    <form onSubmit={enviar} noValidate className={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${className}`}>
       <Campo label="Nombre y apellido" error={errores["nombre"]} isRed={isRed}>
         <input
           name="nombre"

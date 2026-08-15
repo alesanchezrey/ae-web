@@ -18,7 +18,6 @@ export function SecuenciaFrames({
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const imagenes = useRef<(HTMLImageElement | null)[]>([]);
-  const urls = useRef<(string | null)[]>([]);
   const ultimo = useRef(-1);
   const total = useRef(totalEscritorio);
   const [listo, setListo] = useState(false);
@@ -28,10 +27,6 @@ export function SecuenciaFrames({
     const n = movil ? totalMovil : totalEscritorio;
     total.current = n;
     imagenes.current = Array(n).fill(null);
-    urls.current = Array.from(
-      { length: n },
-      (_, i) => `${base}/${movil ? "mobile" : "desktop"}/f${String(i + 1).padStart(3, "0")}.webp`,
-    );
     ultimo.current = -1;
     let cancelado = false;
 
@@ -40,30 +35,36 @@ export function SecuenciaFrames({
         const img = new Image();
         img.decoding = "async";
         img.onload = img.onerror = () => {
-          const actual = Math.round((progresoRef.current ?? 0) * (n - 1));
-          if (!cancelado && Math.abs(i - actual) <= 6) imagenes.current[i] = img;
+          if (!cancelado) imagenes.current[i] = img;
           resolve();
         };
-        const ruta = urls.current[i];
-        if (!ruta) {
-          resolve();
-          return;
-        }
-        img.src = ruta;
+        img.src = `${base}/${movil ? "mobile" : "desktop"}/f${String(i + 1).padStart(3, "0")}.webp`;
       });
 
-    const claves = Array.from({ length: Math.ceil(n / 8) }, (_, i) => Math.min(i * 8, n - 1));
+    const orden: number[] = [];
+    const vistos = new Set<number>();
+    for (const paso of [8, 4, 2, 1]) {
+      for (let i = 0; i < n; i += paso) {
+        if (!vistos.has(i)) {
+          vistos.add(i);
+          orden.push(i);
+        }
+      }
+    }
 
     void (async () => {
-      await Promise.all(claves.map(cargar));
+      const primeros = orden.slice(0, Math.ceil(n / 8));
+      await Promise.all(primeros.map(cargar));
       if (cancelado) return;
       setListo(true);
+      for (const i of orden.slice(primeros.length)) {
+        if (cancelado) return;
+        await cargar(i);
+      }
     })();
 
     return () => {
       cancelado = true;
-      imagenes.current = [];
-      urls.current = [];
     };
   }, [base, totalEscritorio, totalMovil]);
 
@@ -75,7 +76,6 @@ export function SecuenciaFrames({
     const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
     let pendiente = false;
-    let cargando = -1;
 
     let anchoPrevio = window.innerWidth;
     const redimensionar = () => {
@@ -100,8 +100,9 @@ export function SecuenciaFrames({
       pendiente = false;
       if (escribiendo()) return;
       const n = total.current;
-      const solicitado = Math.min(n - 1, Math.round((progresoRef.current ?? 0) * (n - 1)));
-      const idx = masCercano(solicitado);
+      const idx = masCercano(
+        Math.min(n - 1, Math.round((progresoRef.current ?? 0) * (n - 1))),
+      );
       if (idx !== -1 && idx !== ultimo.current) {
         const img = imagenes.current[idx];
         if (img?.naturalWidth) {
@@ -113,33 +114,6 @@ export function SecuenciaFrames({
           const h = img.naturalHeight * escala;
           ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
           ultimo.current = idx;
-
-          // El navegador conserva cada WebP decodificado en memoria. Mantener los
-          // 96 fotogramas vivos consume cientos de MB y bloquea la edición de
-          // campos en equipos con memoria limitada. Conservamos una ventana
-          // alrededor del fotograma actual; las URLs siguen en caché HTTP.
-          for (let j = 0; j < imagenes.current.length; j++) {
-            if (Math.abs(j - solicitado) > 6) imagenes.current[j] = null;
-          }
-        }
-      }
-
-      if (!imagenes.current[solicitado] && cargando !== solicitado) {
-        const ruta = urls.current[solicitado];
-        if (ruta) {
-          cargando = solicitado;
-          const img = new Image();
-          img.decoding = "async";
-          img.onload = () => {
-            imagenes.current[solicitado] = img;
-            cargando = -1;
-            ultimo.current = -1;
-            programarDibujo();
-          };
-          img.onerror = () => {
-            cargando = -1;
-          };
-          img.src = ruta;
         }
       }
     };
@@ -152,8 +126,7 @@ export function SecuenciaFrames({
 
     const redimensionarYDibujar = () => {
       // El teclado virtual dispara resize por alto; ignoramos esos casos.
-      if (escribiendo()) return;
-      if (window.innerWidth === anchoPrevio) return;
+      if (window.innerWidth === anchoPrevio && escribiendo()) return;
       anchoPrevio = window.innerWidth;
       redimensionar();
       programarDibujo();

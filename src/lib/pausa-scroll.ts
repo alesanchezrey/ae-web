@@ -6,6 +6,5 @@ export function escribiendo(): boolean {
   const el = document.activeElement as HTMLElement | null;
   if (!el) return false;
   const tag = el.tagName;
-  if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || el.isContentEditable) return true;
-  return el.closest(".snap-x, .snap-mandatory") !== null;
+  return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || el.isContentEditable;
 }
