@@ -73,8 +73,6 @@ export function SecuenciaFrames({
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
     const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let raf = 0;
-    let pendiente = false;
 
     const redimensionar = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -95,7 +93,6 @@ export function SecuenciaFrames({
     };
 
     const dibujar = () => {
-      pendiente = false;
       const n = total.current;
       const idx = masCercano(
         Math.min(n - 1, Math.round((progresoRef.current ?? 0) * (n - 1))),
@@ -115,26 +112,19 @@ export function SecuenciaFrames({
       }
     };
 
-    const programarDibujo = () => {
-      if (pendiente) return;
-      pendiente = true;
-      raf = requestAnimationFrame(dibujar);
-    };
-
     const redimensionarYDibujar = () => {
       redimensionar();
-      programarDibujo();
+      dibujar();
     };
 
     redimensionar();
-    programarDibujo();
+    dibujar();
     if (!reducirMovimiento) {
-      window.addEventListener("scroll", programarDibujo, { passive: true });
+      window.addEventListener("scroll", dibujar, { passive: true });
     }
     window.addEventListener("resize", redimensionarYDibujar, { passive: true });
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", programarDibujo);
+      window.removeEventListener("scroll", dibujar);
       window.removeEventListener("resize", redimensionarYDibujar);
     };
   }, [progresoRef, listo]);
